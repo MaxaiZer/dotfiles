@@ -3,7 +3,7 @@
 ## Installation
 
 - Install stow (`sudo dnf install stow`)
-- Clone repo
+- Clone repo (`git clone https://github.com/MaxaiZer/dotfiles`)
 - Move to repo folder (`cd dotfiles`)
 - Run `stow <package-name>`
 
