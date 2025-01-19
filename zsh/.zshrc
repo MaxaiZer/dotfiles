@@ -81,6 +81,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#a8a8a8,bold'
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
