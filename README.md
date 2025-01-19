@@ -2,9 +2,7 @@
 
 ## Installation
 
-- Install stow (`sudo dnf install stow`)
-- Clone repo (`git clone https://github.com/MaxaiZer/dotfiles`)
-- Move to repo folder (`cd dotfiles`)
-- Run `stow <package-name>`
-
+- Install stow (e.g. `sudo dnf install stow`)
+- Clone repo
+- Run `stow <package-name>` inside the repo folder  
 For example, after running `stow kitty`, symlinks will be created in `~/.config/kitty`
