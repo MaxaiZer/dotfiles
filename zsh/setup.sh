@@ -60,3 +60,11 @@ else
     echo "Installing Powerlevel10k theme..."
     sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 fi
+
+if command -v fzf &> /dev/null; then
+	echo "fzf is already installed."
+else
+	echo "Installing fzf..."
+	sudo git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install
+fi
