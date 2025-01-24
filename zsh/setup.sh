@@ -1,12 +1,31 @@
 #!/bin/bash
 
+detect_install_command() {
+    if command -v apt &> /dev/null; then
+        INSTALL_CMD="sudo apt install -y"
+    elif command -v dnf &> /dev/null; then
+        INSTALL_CMD="sudo dnf install -y"
+    elif command -v yum &> /dev/null; then
+        INSTALL_CMD="sudo yum install -y"
+    elif command -v pacman &> /dev/null; then
+        INSTALL_CMD="sudo pacman -S --noconfirm"
+    elif command -v zypper &> /dev/null; then
+        INSTALL_CMD="sudo zypper install -y"
+    else
+        echo "No supported package manager found."
+        exit 1
+    fi
+}
+
+detect_install_command
+
 set -e
 
 echo "Installing Zsh..."
-sudo dnf install zsh -y
+$INSTALL_CMD zsh -y
 
 echo "Setting Zsh as the default shell..."
-chsh -s "$(which zsh)"
+sudo chsh -s "$(which zsh)"
 
 echo "Custom: $ZSH_CUSTOM"
 
