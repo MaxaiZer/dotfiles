@@ -33,7 +33,7 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
     echo "Oh My Zsh is already installed."
 else
     echo "Installing Oh My Zsh..." 
-    sh -x -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 if [ -z "$ZSH_CUSTOM" ]; then
@@ -44,27 +44,27 @@ if [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
     echo "zsh-autosuggestions are already installed."
 else
     echo "Installing zsh-autosuggestions..."
-    sudo git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 fi
 
 if [ -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
     echo "zsh-syntax-highlighting is already installed."
 else
     echo "Installing zsh-syntax-highlighting..."
-    sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 fi
 
 if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
     echo "powerlevel10k is already installed."
 else
     echo "Installing Powerlevel10k theme..."
-    sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 fi
 
 if command -v fzf &> /dev/null; then
 	echo "fzf is already installed."
 else
 	echo "Installing fzf..."
-	sudo git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install --key-bindings --completion --no-update-rc
 fi
