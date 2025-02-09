@@ -126,3 +126,6 @@ if [ -f ~/.fzf.zsh ]; then
 else
     source <(fzf --zsh)
 fi
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
