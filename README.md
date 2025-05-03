@@ -11,3 +11,4 @@ But if folder contains install.sh, just run it.
 
 ## Tips
 - Don't forget to set profile MyProfile in Konsole after stow.
+- If config file contains NAME_OF_THE_USER, run `./correct_username.sh <file>` to replace it with your username.
