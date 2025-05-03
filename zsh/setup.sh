@@ -68,3 +68,8 @@ else
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	~/.fzf/install --key-bindings --completion --no-update-rc
 fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ln -sf "$SCRIPT_DIR/.zshrc" "$HOME/.zshrc"
+ln -sf "$SCRIPT_DIR/.p10k.zsh" "$HOME/.p10k.zsh"
+echo "Created symlinks for .zshrc and .p10k.zsh"
