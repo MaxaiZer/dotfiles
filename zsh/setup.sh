@@ -37,7 +37,7 @@ else
 fi
 
 if [ -z "$ZSH_CUSTOM" ]; then
-	ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"	
+    ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"	
 fi
 
 if [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
@@ -62,18 +62,18 @@ else
 fi
 
 if command -v fzf &> /dev/null; then
-	echo "fzf is already installed."
+    echo "fzf is already installed."
 else
-	echo "Installing fzf..."
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install --key-bindings --completion --no-update-rc
+    echo "Installing fzf..."
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --key-bindings --completion --no-update-rc
 fi
 
 if command -v zoxide &> /dev/null; then
-	echo "zoxide is already installed."
+    echo "zoxide is already installed."
 else
-	echo "Installing zoxide..."
-	$INSTALL_CMD zoxide
+    echo "Installing zoxide..."
+    $INSTALL_CMD zoxide
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
