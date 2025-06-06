@@ -69,6 +69,13 @@ else
 	~/.fzf/install --key-bindings --completion --no-update-rc
 fi
 
+if command -v zoxide &> /dev/null; then
+	echo "zoxide is already installed."
+else
+	echo "Installing zoxide..."
+	$INSTALL_CMD zoxide
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ln -sf "$SCRIPT_DIR/.zshrc" "$HOME/.zshrc"
 ln -sf "$SCRIPT_DIR/.p10k.zsh" "$HOME/.p10k.zsh"

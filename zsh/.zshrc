@@ -129,3 +129,5 @@ fi
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
+
+eval "$(zoxide init zsh)"
