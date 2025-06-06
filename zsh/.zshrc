@@ -128,6 +128,6 @@ else
 fi
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
+ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *|nano *|micro *|nvim *"
 
 eval "$(zoxide init zsh)"
