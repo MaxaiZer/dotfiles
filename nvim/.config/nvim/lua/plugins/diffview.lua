@@ -4,7 +4,7 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
     {
-      "dv",
+      "<leader>gd",
       function()
         if next(require("diffview.lib").views) == nil then
           vim.cmd("DiffviewOpen")
