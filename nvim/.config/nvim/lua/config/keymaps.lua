@@ -6,6 +6,8 @@ vim.keymap.set("n", "<Space>/", function()
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
+        width = 9999,
+        height = 9999,
         prompt_position = "bottom",
         results_width = 0.35,
         preview_width = 0.65,
