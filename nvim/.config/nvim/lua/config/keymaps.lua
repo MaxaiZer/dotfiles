@@ -15,3 +15,5 @@ vim.keymap.set("n", "<Space>/", function()
     },
   })
 end, { desc = "Live Grep" })
+
+vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Neogit" })
