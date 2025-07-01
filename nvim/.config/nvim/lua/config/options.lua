@@ -3,7 +3,6 @@
 -- Add any additional options here
 
 vim.opt.number = true
-vim.opt.relativenumber = false
 vim.o.pumblend = 0
 
 if vim.fn.has("win32") == 1 then
