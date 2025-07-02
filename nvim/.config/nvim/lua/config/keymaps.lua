@@ -31,3 +31,7 @@ end, { desc = "Live Grep" })
 vim.keymap.set("n", "<Space>r/", ":Telescope resume<CR>", { desc = "Telescope resume" })
 
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Neogit" })
+
+vim.keymap.set("n", "<leader>gB", function()
+  require("gitsigns").toggle_current_line_blame()
+end, { desc = "Toggle GitSigns current line blame" })
