@@ -13,5 +13,13 @@ return {
         },
       })
     end,
+    keys = {
+      {
+        "<leader>gg",
+        ":Neogit<CR>",
+        desc = "Open Neogit",
+        mode = "n",
+      },
+    },
   },
 }
