@@ -18,6 +18,15 @@ local live_grep_config = {
       preview_cutoff = 0,
     },
   },
+  attach_mappings = function(_, map)
+    map("i", "<C-t>", function(bufnr)
+      require("trouble.sources.telescope").open(bufnr)
+    end)
+    map("n", "<C-t>", function(bufnr)
+      require("trouble.sources.telescope").open(bufnr)
+    end)
+    return true
+  end,
 }
 
 return {
@@ -25,6 +34,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
+      "folke/trouble.nvim",
       {
         "nvim-telescope/telescope-live-grep-args.nvim",
         config = function()
