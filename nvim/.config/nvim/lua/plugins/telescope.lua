@@ -48,6 +48,9 @@ return {
         function()
           local config = vim.tbl_deep_extend("force", live_grep_config, {
             default_text = vim.fn.getreg("+"):match("^[^\n\r]*"),
+            additional_args = function()
+              return { "-F" }
+            end,
           })
           require("telescope").extensions.live_grep_args.live_grep_args(config)
         end,
