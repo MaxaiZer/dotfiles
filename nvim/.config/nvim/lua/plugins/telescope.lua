@@ -33,6 +33,7 @@ return {
   { "nvim-telescope/telescope-live-grep-args.nvim" },
   {
     "nvim-telescope/telescope.nvim",
+    lazy = false,
     dependencies = {
       "folke/trouble.nvim",
       {
