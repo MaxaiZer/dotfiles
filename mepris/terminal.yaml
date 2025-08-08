@@ -6,6 +6,11 @@ steps:
     tags: ["terminal"]
     packages: ["ripgrep", "neovim", "lazygit", "zoxide"]
 
+  - id: neovim-linux-helpers
+    os: "linux"
+    tags: ["terminal"]
+    packages: ["xclip"]
+
   - id: windows-powershell
     os: "windows"
     tags: ["terminal"]
