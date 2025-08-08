@@ -1,0 +1,101 @@
+defaults:
+  windows_package_manager: scoop
+
+steps:
+  - id: terminal-core
+    tags: ["terminal"]
+    packages: ["ripgrep", "neovim", "lazygit", "zoxide"]
+
+  - id: windows-powershell
+    os: "windows"
+    tags: ["terminal"]
+    packages: ["pwsh", "oh-my-posh", "fzf"]
+    script:
+      shell: pwsh
+      run: |
+        Install-Module -Name posh-git -Scope CurrentUser -Force
+        Install-Module -Name PSFzf -Scope CurrentUser -Force
+
+  - id: yazi
+    os: "!%debian"
+    tags: ["terminal"]
+    packages: ["yazi"]
+
+  - id: yazi-debian
+    os: "%debian"
+    tags: ["terminal"]
+    when: |
+      if command -v yazi >/dev/null 2>&1; then exit 1; else exit 0; fi
+    script: |
+      wget -qO yazi.zip https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip
+      unzip -q yazi.zip -d yazi-temp
+      sudo mv yazi-temp/*/{ya,yazi} /usr/local/bin
+      rm -rf yazi-temp yazi.zip
+
+  - id: fd-find
+    os: "!windows && !%arch"
+    tags: ["terminal"]
+    packages: ["fd-find"]
+
+  - id: fd
+    os: "windows || %arch"
+    tags: ["terminal"]
+    packages: ["fd"]
+
+  - id: stow
+    os: "!windows"
+    tags: ["terminal", "stow"]
+    packages: ["git", "stow"]
+    when: |
+      [ -d "~/dotfiles" ] && exit 1 || exit 0
+    script: |
+      cd
+      git clone https://github.com/MaxaiZer/dotfiles
+      cd dotfiles
+      stow nvim
+      stow yazi
+      chmod +x zsh/setup.sh
+      ./zsh/setup.sh
+
+  - id: stow-konsole
+    os: "!windows"
+    tags: ["terminal", "stow"]
+    when: |
+      if command -v konsole >/dev/null 2>&1; then exit 0; else exit 1; fi
+    script: |
+      cd ~/dotfiles
+      stow konsole
+
+  - id: stow-windows
+    os: "windows"
+    tags: ["terminal", "stow"]
+    script:
+      shell: pwsh
+      run: |
+        cd
+        git clone https://github.com/MaxaiZer/dotfiles
+        Copy-Item -Recurse -Force "$HOME\dotfiles\nvim\.config\nvim" "$env:LOCALAPPDATA\nvim\"
+
+  - id: nerd-fonts
+    os: "!windows"
+    tags: ["terminal", "fonts"]
+    packages: ["jq"]
+    when: |
+      if fc-list | grep -qi 'JetBrainsMono.*Nerd Font'; then
+          exit 1
+      else
+          exit 0
+      fi
+    script: |
+      cd ~/dotfiles
+      chmod +x install_nerd_fonts.sh
+      ./install_nerd_fonts.sh
+
+  - id: nerd-fonts-windows
+    os: "windows"
+    tags: ["terminal", "fonts"]
+    pre_script:
+      shell: pwsh
+      run: scoop bucket add nerd-fonts
+    packages: ["JetBrainsMono-NF"]
+    package_manager: scoop
