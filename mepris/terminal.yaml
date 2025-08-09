@@ -73,6 +73,7 @@ steps:
     script: |
       cd ~/dotfiles
       stow konsole
+      sed -i "s/^DefaultProfile=.*/DefaultProfile=MyProfile.profile/" "$HOME/.config/konsolerc"
 
   - id: stow-windows
     os: "windows"
