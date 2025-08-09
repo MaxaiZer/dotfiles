@@ -6,3 +6,6 @@ Font=Monospace,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 Command=/bin/zsh
 Name=MyProfile
 Parent=FALLBACK/
+
+[Scrolling]
+ScrollBarPosition=2

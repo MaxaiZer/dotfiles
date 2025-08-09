@@ -6,6 +6,11 @@ steps:
     tags: ["terminal"]
     packages: ["ripgrep", "neovim", "lazygit", "zoxide"]
 
+  - id: neovim-linux-helpers
+    os: "linux"
+    tags: ["terminal"]
+    packages: ["xclip"]
+
   - id: windows-powershell
     os: "windows"
     tags: ["terminal"]
@@ -49,13 +54,16 @@ steps:
     when: |
       [ -d "~/dotfiles" ] && exit 1 || exit 0
     script: |
-      cd
-      git clone https://github.com/MaxaiZer/dotfiles
-      cd dotfiles
+      git clone https://github.com/MaxaiZer/dotfiles ~/dotfiles
+      cd ~/dotfiles
       stow nvim
       stow yazi
       chmod +x zsh/setup.sh
       ./zsh/setup.sh
+      sudo mkdir -p /usr/share/backgrounds
+      for img in ~/dotfiles/backgrounds/*; do
+        sudo ln -s "$img" /usr/share/backgrounds/
+      done
 
   - id: stow-konsole
     os: "!windows"
@@ -65,6 +73,7 @@ steps:
     script: |
       cd ~/dotfiles
       stow konsole
+      sed -i "s/^DefaultProfile=.*/DefaultProfile=MyProfile.profile/" "$HOME/.config/konsolerc"
 
   - id: stow-windows
     os: "windows"
