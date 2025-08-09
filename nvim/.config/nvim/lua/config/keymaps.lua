@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<C-a>", "gg0vG$", { desc = "Select all" })
+vim.keymap.set("n", "<C-a>", ":normal! ggVG<CR>", { desc = "Select all" })
 vim.keymap.set("n", "<C-q>", ":qa<CR>", { desc = "Quit all" })
 vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save file" })
 
