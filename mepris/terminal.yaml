@@ -81,8 +81,7 @@ steps:
     script:
       shell: pwsh
       run: |
-        cd
-        git clone https://github.com/MaxaiZer/dotfiles
+        git clone https://github.com/MaxaiZer/dotfiles ~/dotfiles
         Copy-Item -Recurse -Force "$HOME\dotfiles\nvim\.config\nvim" "$env:LOCALAPPDATA\nvim\"
 
   - id: nerd-fonts
