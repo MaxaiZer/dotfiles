@@ -81,8 +81,15 @@ steps:
     script:
       shell: pwsh
       run: |
-        git clone https://github.com/MaxaiZer/dotfiles ~/dotfiles
-        Copy-Item -Recurse -Force "$HOME\dotfiles\nvim\.config\nvim" "$env:LOCALAPPDATA\nvim\"
+        git clone https://github.com/MaxaiZer/dotfiles "$HOME/dotfiles"
+        $targetDir = "$env:LOCALAPPDATA\nvim"
+        New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
+        Copy-Item -Recurse -Force "$HOME\dotfiles\nvim\.config\nvim\*" $targetDir
+        $targetDir = "$env:APPDATA\yazi\config"
+        $targetPath = "$targetDir\yazi.toml"
+        New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
+        Copy-Item -Force "$HOME\dotfiles\yazi\.config\yazi\yazi.toml" $targetPath
+        (Get-Content -Path $targetPath -Raw) -replace '\$@', '%1' | Set-Content -Path $targetPath -NoNewline
 
   - id: nerd-fonts
     os: "!windows"
