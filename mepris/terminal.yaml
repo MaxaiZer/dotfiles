@@ -52,7 +52,7 @@ steps:
     tags: ["terminal", "stow"]
     packages: ["git", "stow"]
     when: |
-      [ -d "~/dotfiles" ] && exit 1 || exit 0
+      [ -d ~/dotfiles ] && exit 1 || exit 0
     script: |
       git clone https://github.com/MaxaiZer/dotfiles ~/dotfiles
       cd ~/dotfiles
