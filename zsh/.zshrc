@@ -140,3 +140,7 @@ function yy() {
     fi
     rm -f -- "$tmp"
 }
+
+[ -d "${HOME}/.cargo/bin" ] && PATH="${PATH}:${HOME}/.cargo/bin"
+[ -d "${HOME}/go/bin" ] && PATH="${PATH}:${HOME}/go/bin"
+export PATH
