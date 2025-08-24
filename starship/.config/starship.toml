@@ -1,13 +1,4 @@
 add_newline = false
-prompt_order = [
-    "directory",
-    "git_branch",
-    "git_state",
-    "git_status",
-    "status",
-    "symbol",
-    "time"
-]
 format = """$directory$git_branch$git_state$git_status$status"""
 right_format = """$cmd_duration$time"""
 
@@ -17,6 +8,7 @@ read_only = ""
 home_symbol = "~"
 truncation_symbol = '…/'
 truncate_to_repo = false
+style = "blue"
 
 [git_branch]
 symbol = " "
@@ -39,23 +31,13 @@ conflicted = "x${count} "
 renamed = ""
 deleted = ""
 
-[git_status.staged_style]
-style = "bold green"
-[git_status.modified_style]
-style = "bold yellow"
-[git_status.untracked_style]
-style = "bold red"
-[git_status.branch_style]
-style = "bold blue"
-
 [status]
 format = "[$symbol]($style)"
 symbol = "❯ "
 success_symbol = "❯ "
 style = "bold red"
-success_style = "bold blue"
+success_style = "bold green"
 disabled = false
-show_always = false
 
 [cmd_duration]
 min_time = 500
@@ -67,9 +49,6 @@ style = "bold blue"
 disabled = false
 
 [rust]
-disabled = true
-
-[cargo]
 disabled = true
 
 [nodejs]
