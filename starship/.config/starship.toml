@@ -20,10 +20,10 @@ format = '[\($state( $progress_current of $progress_total)\)]($style) '
 cherry_pick = '[🍒](bold red)'
 
 [git_status]
-format = "[$ahead$behind$diverged]($branch_style)[$staged](bold yellow)[$modified](bold yellow)[$untracked](cyan)[$conflicted](red)"
-ahead = '⇡${count}'
-diverged = '⇡${ahead_count}⇣${behind_count}'
-behind = '⇣${count}'
+format = "[$ahead_behind](yellow)[$staged](bold yellow)[$modified](bold yellow)[$untracked](cyan)[$conflicted](red)"
+ahead = "⇡${count} "
+diverged = "⇡${ahead_count}⇣${behind_count} "
+behind = "⇣${count} "
 staged = "+${count} "
 modified = "!${count} ($modified_style)"
 untracked = "?${count} "
