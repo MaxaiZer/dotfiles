@@ -1,0 +1,61 @@
+add_newline = false
+format = """$directory$git_branch$git_state$git_status$status"""
+right_format = """$cmd_duration$time"""
+
+[directory]
+truncation_length = 8
+read_only = " "
+home_symbol = "~"
+truncation_symbol = '…/'
+truncate_to_repo = false
+style = "blue"
+
+[git_branch]
+symbol = " "
+format = "[$symbol]($style)[$branch]($style) "
+style = "bold green"
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒](bold red)'
+
+[git_status]
+format = "[$ahead_behind](yellow)[$staged](bold yellow)[$modified](bold yellow)[$untracked](cyan)[$conflicted](red)"
+ahead = "↑${count} "
+diverged = "↑${ahead_count}↓${behind_count} "
+behind = "↓${count} "
+staged = "+${count} "
+modified = "!${count} ($modified_style)"
+untracked = "?${count} "
+conflicted = "x${count} "
+renamed = ""
+deleted = ""
+
+[status]
+format = "[$symbol]($style)"
+symbol = "❯ "
+success_symbol = "❯ "
+style = "bold red"
+success_style = "bold green"
+disabled = false
+
+[cmd_duration]
+min_time = 500
+format = "[$duration](bold yellow) "
+
+[time]
+format = "[$time]($style)"
+style = "bold blue"
+disabled = false
+
+[rust]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[python]
+disabled = true
+
+[package]
+disabled = true
