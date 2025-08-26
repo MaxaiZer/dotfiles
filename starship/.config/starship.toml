@@ -4,7 +4,7 @@ right_format = """$cmd_duration$time"""
 
 [directory]
 truncation_length = 8
-read_only = ""
+read_only = " "
 home_symbol = "~"
 truncation_symbol = '…/'
 truncate_to_repo = false
@@ -21,9 +21,9 @@ cherry_pick = '[🍒](bold red)'
 
 [git_status]
 format = "[$ahead_behind](yellow)[$staged](bold yellow)[$modified](bold yellow)[$untracked](cyan)[$conflicted](red)"
-ahead = "⇡${count} "
-diverged = "⇡${ahead_count}⇣${behind_count} "
-behind = "⇣${count} "
+ahead = "↑${count} "
+diverged = "↑${ahead_count}↓${behind_count} "
+behind = "↓${count} "
 staged = "+${count} "
 modified = "!${count} ($modified_style)"
 untracked = "?${count} "
