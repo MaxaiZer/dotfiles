@@ -1,31 +1,8 @@
 #!/bin/bash
-
-detect_install_command() {
-  if command -v apt &>/dev/null; then
-    INSTALL_CMD="sudo apt install -y"
-  elif command -v dnf &>/dev/null; then
-    INSTALL_CMD="sudo dnf install -y"
-  elif command -v yum &>/dev/null; then
-    INSTALL_CMD="sudo yum install -y"
-  elif command -v pacman &>/dev/null; then
-    INSTALL_CMD="sudo pacman -S --noconfirm"
-  elif command -v zypper &>/dev/null; then
-    INSTALL_CMD="sudo zypper install -y"
-  else
-    echo "No supported package manager found."
-    exit 1
-  fi
-}
-
-detect_install_command
-
 set -e
 
-echo "Installing Zsh..."
-$INSTALL_CMD zsh -y
-
 echo "Setting Zsh as the default shell..."
-sudo chsh -s "$(which zsh)"
+sudo chsh -s "$(which zsh)" $USER
 
 echo "Custom: $ZSH_CUSTOM"
 
@@ -66,21 +43,6 @@ if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
 else
   echo "Installing Powerlevel10k theme..."
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
-fi
-
-if command -v fzf &>/dev/null; then
-  echo "fzf is already installed."
-else
-  echo "Installing fzf..."
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install --key-bindings --completion --no-update-rc
-fi
-
-if command -v zoxide &>/dev/null; then
-  echo "zoxide is already installed."
-else
-  echo "Installing zoxide..."
-  $INSTALL_CMD zoxide
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
