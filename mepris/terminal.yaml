@@ -21,7 +21,7 @@ steps:
   - id: windows-powershell
     os: "windows"
     tags: ["terminal"]
-    packages: ["pwsh", "oh-my-posh", "fzf"]
+    packages: ["pwsh", "fzf"]
     script:
       shell: pwsh
       run: |
@@ -107,19 +107,25 @@ steps:
 
   - id: stow-windows
     os: "windows"
-    tags: ["terminal", "stow"]
+    tags: ["terminal", "stow", "no-admin"]
     script:
       shell: pwsh
       run: |
         git clone https://github.com/MaxaiZer/dotfiles "$HOME/dotfiles"
+        #nvim
         $targetDir = "$env:LOCALAPPDATA\nvim"
         New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
         Copy-Item -Recurse -Force "$HOME\dotfiles\nvim\.config\nvim\*" $targetDir
+        #yazi
         $targetDir = "$env:APPDATA\yazi\config"
         $targetPath = "$targetDir\yazi.toml"
         New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
         Copy-Item -Force "$HOME\dotfiles\yazi\.config\yazi\yazi.toml" $targetPath
         (Get-Content -Path $targetPath -Raw) -replace '\$@', '%1' | Set-Content -Path $targetPath -NoNewline
+        #starship
+        Copy-Item -Force "$HOME\dotfiles\starship\.config\starship.toml" "$HOME\.config\"
+        #pwsh
+        Set-Content -Path $PROFILE -Value (Get-Content "$HOME\dotfiles\pwsh\profile.ps1" -Raw)
 
   - id: nerd-fonts
     os: "!windows"
