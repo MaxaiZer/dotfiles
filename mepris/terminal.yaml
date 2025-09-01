@@ -138,9 +138,8 @@ steps:
           exit 0
       fi
     script: |
-      cd ~/dotfiles
-      chmod +x install_nerd_fonts.sh
-      ./install_nerd_fonts.sh
+      chmod +x ~/dotfiles/install_nerd_fonts.sh
+      ~/dotfiles/install_nerd_fonts.sh
 
   - id: nerd-fonts-windows
     os: "windows"
