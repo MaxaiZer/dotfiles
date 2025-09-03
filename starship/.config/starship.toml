@@ -4,12 +4,12 @@ format = """$directory$git_branch$git_state$git_status$status"""
 right_format = """$cmd_duration$time"""
 
 [directory]
-truncation_length = 8
+truncation_length = 3
 read_only = " "
 home_symbol = "~"
-truncation_symbol = '…/'
 truncate_to_repo = false
 style = "blue"
+fish_style_pwd_dir_length = 1
 
 [git_branch]
 symbol = " "
