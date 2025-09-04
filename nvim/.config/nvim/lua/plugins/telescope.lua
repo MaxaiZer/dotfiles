@@ -45,35 +45,24 @@ return {
         end,
       },
     },
-    keys = {
-      {
-        "<leader>/",
-        function()
-          require("telescope").extensions.live_grep_args.live_grep_args(live_grep_config)
-        end,
-        desc = "Live Grep",
-        mode = "n",
-      },
-      {
-        "<leader>/c",
-        function()
-          local config = vim.tbl_deep_extend("force", live_grep_config, {
-            default_text = vim.fn.getreg("+"):match("^[^\n\r]*"),
-            additional_args = function()
-              return { "-F" }
-            end,
-          })
-          require("telescope").extensions.live_grep_args.live_grep_args(config)
-        end,
-        desc = "Live Grep (clipboard)",
-        mode = "n",
-      },
-      {
-        "<Space>r/",
-        "<cmd>Telescope resume<cr>",
-        desc = "Telescope resume",
-        mode = "n",
-      },
-    },
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+
+      vim.keymap.set("n", "<leader>/", function()
+        require("telescope").extensions.live_grep_args.live_grep_args(live_grep_config)
+      end, { desc = "Live Grep" })
+
+      vim.keymap.set("n", "<leader>/p", function()
+        local config = vim.tbl_deep_extend("force", live_grep_config, {
+          default_text = vim.fn.getreg("+"):match("^[^\n\r]*"),
+          additional_args = function()
+            return { "-F" }
+          end,
+        })
+        require("telescope").extensions.live_grep_args.live_grep_args(config)
+      end, { desc = "Live Grep (clipboard)" })
+
+      vim.keymap.set("n", "<leader>/r", "<cmd>Telescope resume<cr>", { desc = "Telescope resume" })
+    end,
   },
 }
