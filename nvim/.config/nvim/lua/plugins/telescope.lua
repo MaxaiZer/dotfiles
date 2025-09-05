@@ -46,6 +46,14 @@ return {
       },
     },
     config = function()
+      require("telescope").setup({
+        defaults = {
+          preview = {
+            timeout = 250,
+          },
+        },
+      })
+
       require("telescope").load_extension("live_grep_args")
 
       vim.keymap.set("n", "<leader>/", function()
