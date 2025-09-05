@@ -1,3 +1,5 @@
+vim.api.nvim_set_hl(0, "TelescopePath", { fg = "#B0B0B0" })
+
 local entry_display = require("telescope.pickers.entry_display")
 local make_entry = require("telescope.make_entry")
 
@@ -13,7 +15,7 @@ local custom_entry_maker = function(opts)
 
   local make_display = function(entry)
     return displayer({
-      { entry.value.path, "TelescopeResultsComment" },
+      { entry.value.path, "TelescopePath" },
       entry.value.text:gsub("^%s+", ""),
     })
   end
