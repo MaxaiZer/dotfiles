@@ -1,3 +1,37 @@
+local entry_display = require("telescope.pickers.entry_display")
+local make_entry = require("telescope.make_entry")
+
+local custom_entry_maker = function(opts)
+  opts = opts or {}
+  local displayer = entry_display.create({
+    separator = ": ",
+    items = {
+      { remaining = true },
+      { remaining = true },
+    },
+  })
+
+  local make_display = function(entry)
+    return displayer({
+      { entry.value.path, "TelescopeResultsComment" },
+      entry.value.text:gsub("^%s+", ""),
+    })
+  end
+
+  return function(line)
+    local entry = make_entry.gen_from_vimgrep(opts)(line)
+    if entry then
+      entry.ordinal = entry.filename .. " " .. entry.text
+      entry.display = make_display
+      entry.value = {
+        path = vim.fn.fnamemodify(entry.filename, ":."),
+        text = entry.text,
+      }
+    end
+    return entry
+  end
+end
+
 local live_grep_config = {
   layout_strategy = "vertical",
   path_display = { "smart" },
@@ -18,6 +52,7 @@ local live_grep_config = {
       preview_cutoff = 0,
     },
   },
+  entry_maker = custom_entry_maker(),
   attach_mappings = function(_, map)
     map("i", "<C-t>", function(bufnr)
       require("trouble.sources.telescope").open(bufnr)
