@@ -4,7 +4,8 @@ defaults:
 steps:
   - id: terminal-core
     tags: ["terminal"]
-    packages: ["ripgrep", "neovim", "lazygit", "zoxide", "starship"]
+    packages:
+      ["gcc", "ripgrep", "sed", "neovim", "lazygit", "zoxide", "starship"]
 
   - id: fzf
     os: "!windows"
