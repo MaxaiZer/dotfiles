@@ -1,0 +1,9 @@
+steps:
+  - id: install-notes-apps
+    packages: ["anki", "obsidian"]
+
+  - id: install-messaging-apps
+    packages: ["telegram", "discord"]
+
+  - id: install-browser
+    packages: ["vivaldi"]

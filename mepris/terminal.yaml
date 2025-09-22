@@ -1,6 +1,3 @@
-defaults:
-  windows_package_manager: scoop
-
 steps:
   - id: terminal-core
     tags: ["terminal"]
@@ -149,4 +146,3 @@ steps:
       shell: pwsh
       run: scoop bucket add nerd-fonts
     packages: ["JetBrainsMono-NF"]
-    package_manager: scoop

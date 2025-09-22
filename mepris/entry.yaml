@@ -1,0 +1,7 @@
+defaults:
+  windows_package_manager: scoop
+
+includes:
+  - terminal.yaml
+  - git.yaml
+  - stuff.yaml

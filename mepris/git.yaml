@@ -1,0 +1,28 @@
+steps:
+  - id: setup-git-config
+    os: "!windows"
+    tags: ["git"]
+    env: ["GIT_NAME", "GIT_EMAIL"]
+    script: |
+      git config --global user.name "$GIT_NAME"
+      git config --global user.email "$GIT_EMAIL"
+
+  - id: setup-github-ssh-key
+    os: "!windows"
+    tags: ["git"]
+    env: ["GITHUB_KEY_URL"]
+    script: |
+      set -e
+      SSH_DIR="$HOME/.ssh"
+      mkdir -p "$SSH_DIR"
+      KEY_FILE="$SSH_DIR/github"
+      curl -L -o "$KEY_FILE" "$GITHUB_KEY_URL"
+
+  - id: git-fsmonitor
+    os: "windows"
+    tags: ["git"]
+    script:
+      shell: pwsh
+      run: |
+        git config --global core.fsmonitor true
+        git fsmonitor--daemon start
