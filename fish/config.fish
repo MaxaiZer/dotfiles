@@ -11,6 +11,7 @@ fish_add_path $HOME/go/bin
 
 set -U fish_color_command green
 set -U fish_color_param white
+set -U fish_color_autosuggestion white
 set -U fish_color_operator white
 set -U fish_color_error red
 
