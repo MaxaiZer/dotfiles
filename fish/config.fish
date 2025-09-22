@@ -44,7 +44,7 @@ end
 set SSH_KEY "$HOME/.ssh/github"
 if test -f $SSH_KEY
     set key_fingerprint (ssh-keygen -lf $SSH_KEY 2>/dev/null | awk '{print $2}')
-    if not ssh-add -l 2>/dev/null | grep -q $key_fingerprint
+    if not ssh-add -l 2>/dev/null | grep -q "$key_fingerprint"
         ssh-add $SSH_KEY >/dev/null 2>&1
     end
 end
