@@ -17,6 +17,7 @@ steps:
       mkdir -p "$SSH_DIR"
       KEY_FILE="$SSH_DIR/github"
       curl -L -o "$KEY_FILE" "$GITHUB_KEY_URL"
+      chmod 600 "$KEY_FILE"
 
   - id: git-fsmonitor
     os: "windows"
