@@ -56,8 +56,6 @@ steps:
     os: "!windows"
     tags: ["terminal", "stow"]
     packages: ["git", "stow"]
-    when: |
-      [ -d ~/dotfiles ] && exit 1 || exit 0
     script: |
       git clone https://github.com/MaxaiZer/dotfiles ~/dotfiles
       cd ~/dotfiles
@@ -128,7 +126,7 @@ steps:
   - id: nerd-fonts
     os: "!windows"
     tags: ["terminal", "fonts"]
-    packages: ["jq"]
+    packages: ["jq", "unzip"]
     when: |
       if fc-list | grep -qi 'JetBrainsMono.*Nerd Font'; then
           exit 1
