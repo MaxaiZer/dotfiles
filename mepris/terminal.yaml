@@ -57,13 +57,14 @@ steps:
     tags: ["terminal", "stow"]
     packages: ["git", "stow"]
     script: |
-      git clone https://github.com/MaxaiZer/dotfiles ~/dotfiles
+      set -e
+      [ ! -d ~/dotfiles ] && git clone https://github.com/MaxaiZer/dotfiles ~/dotfiles
       cd ~/dotfiles
       stow nvim
       stow yazi
       sudo mkdir -p /usr/share/backgrounds
       for img in ~/dotfiles/backgrounds/*; do
-        sudo ln -s "$img" /usr/share/backgrounds/
+        sudo ln -sf "$img" /usr/share/backgrounds/
       done
 
   - id: stow-zsh
