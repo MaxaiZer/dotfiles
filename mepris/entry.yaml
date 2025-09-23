@@ -2,6 +2,7 @@ defaults:
   windows_package_manager: scoop
 
 includes:
+  - ssh.yaml
   - terminal.yaml
   - git.yaml
   - stuff.yaml

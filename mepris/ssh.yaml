@@ -1,0 +1,4 @@
+steps:
+  - id: keychain
+    os: "linux"
+    packages: ["keychain"]

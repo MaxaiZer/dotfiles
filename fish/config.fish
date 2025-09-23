@@ -17,6 +17,10 @@ set -U fish_color_error red
 
 set fish_greeting
 
+if type -q keychain
+    eval (keychain --eval --quiet --agents ssh $HOME/.ssh/github)
+end
+
 function yy
     set tmp (mktemp -t yazi-cwd.XXXXXX)
 
@@ -30,22 +34,4 @@ function yy
     end
 
     rm -f $tmp
-end
-
-set -l agent_env "$HOME/.ssh/agent_env"
-
-if not pgrep -u $USER ssh-agent >/dev/null
-    ssh-agent -c >$agent_env 2>/dev/null
-end
-
-if test -f $agent_env
-    source $agent_env >/dev/null
-end
-
-set SSH_KEY "$HOME/.ssh/github"
-if test -f $SSH_KEY
-    set key_fingerprint (ssh-keygen -lf $SSH_KEY 2>/dev/null | awk '{print $2}')
-    if not ssh-add -l 2>/dev/null | grep -q "$key_fingerprint"
-        ssh-add $SSH_KEY >/dev/null 2>&1
-    end
 end
