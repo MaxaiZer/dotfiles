@@ -8,7 +8,7 @@ if [ -d "$HOME/.local/share/omf" ]; then
   echo "Oh My Fish is already installed."
 else
   echo "Installing Oh My Fish..."
-  curl -L https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+  curl -L https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish -c "source - --noninteractive"
 fi
 
 fish -c "omf install fzf"
