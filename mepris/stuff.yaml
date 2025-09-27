@@ -1,6 +1,15 @@
 steps:
-  - id: install-notes-apps
-    packages: ["anki", "obsidian"]
+  - id: install-anki-non-arch
+    os: "!%arch"
+    packages: ["anki"]
+
+  - id: install-anki-arch
+    os: "%arch"
+    packages: ["anki"]
+    package_manager: yay
+
+  - id: install-obsidian
+    packages: ["obsidian"]
 
   - id: install-messaging-apps
     packages: ["telegram", "discord"]
