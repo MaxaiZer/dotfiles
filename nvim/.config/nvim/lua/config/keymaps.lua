@@ -5,9 +5,6 @@ vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save file", silent = true })
 vim.keymap.set("n", "<M-Right>", ":bnext<CR>", { desc = "Next buffer", silent = true })
 vim.keymap.set("n", "<M-Left>", ":bprevious<CR>", { desc = "Previous buffer", silent = true })
 
-vim.keymap.set("n", "]p", "o<ESC>p", { desc = "Insert line below", silent = true })
-vim.keymap.set("n", "[p", "O<ESC>p", { desc = "Insert line above", silent = true })
-
 vim.keymap.set("n", "<leader>gB", function()
   require("gitsigns").toggle_current_line_blame()
 end, { desc = "Toggle GitSigns current line blame", silent = true })
