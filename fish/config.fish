@@ -18,6 +18,7 @@ set -U fish_color_error red
 set fish_greeting
 
 if type -q keychain
+    set -l SHELL fish
     eval (keychain --eval --quiet --agents ssh $HOME/.ssh/github)
 end
 
