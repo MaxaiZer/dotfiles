@@ -16,3 +16,6 @@ steps:
 
   - id: install-browser
     packages: ["vivaldi"]
+
+  - id: install-torrent
+    packages: ["qbittorrent"]
