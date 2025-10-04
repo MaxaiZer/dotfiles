@@ -62,9 +62,9 @@ steps:
       cd ~/dotfiles
       stow nvim
       stow yazi
-      sudo mkdir -p ~/Pictures/backgrounds
+      sudo mkdir -p /usr/share/backgrounds
       for img in ~/dotfiles/backgrounds/*; do
-        sudo ln -sf "$img" ~/Pictures/backgrounds/
+        sudo ln -sf "$img" /usr/share/backgrounds/
       done
 
   - id: stow-zsh
