@@ -2,7 +2,7 @@ steps:
   - id: install-goland-linux
     os: "linux"
     script: | #2024 version to easy crack
-      set -euo pipefail
+      set -e
       ARCHIVE=goland-2024.2.3.tar.gz
       wget -c --progress=bar:force -O $ARCHIVE "https://download-cdn.jetbrains.com/go/goland-2024.2.3.tar.gz"
       EXTRACTED_NAME=$(tar -tf "${ARCHIVE}" | head -n1 | cut -d'/' -f1)
@@ -10,8 +10,9 @@ steps:
         echo "Failed to determine extracted directory name from ${ARCHIVE}" >&2
         exit 1
       fi
+      sudo mkdir -p /opt/jetbrains
       sudo tar -xzf "${ARCHIVE}" -C /opt/jetbrains
-      sudo ln -sfn /opt/jetbrains/$EXTRACTED_NAME /opt/jetbrains/goland
+      sudo ln -sfn "/opt/jetbrains/${EXTRACTED_NAME}" /opt/jetbrains/goland
       rm -f "${ARCHIVE}"
 
       DESKTOP_FILE="$HOME/.local/share/applications/goland.desktop"
