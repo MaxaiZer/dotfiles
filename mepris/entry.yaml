@@ -6,3 +6,4 @@ includes:
   - terminal.yaml
   - git.yaml
   - stuff.yaml
+  - programming/entry.yaml

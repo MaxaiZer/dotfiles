@@ -1,0 +1,28 @@
+steps:
+  - id: install-rider-linux
+    os: "linux"
+    script: | #2024 version to easy crack
+      set -euo pipefail
+      ARCHIVE=rider-2024.1.4.tar.gz
+      wget -c --progress=bar:force -O $ARCHIVE "https://download-cdn.jetbrains.com/rider/JetBrains.Rider-2024.1.4.tar.gz"
+      EXTRACTED_NAME=$(tar -tf "${ARCHIVE}" | head -n1 | cut -d'/' -f1)
+      if [ -z "${EXTRACTED_NAME}" ]; then
+        echo "Failed to determine extracted directory name from ${ARCHIVE}" >&2
+        exit 1
+      fi
+      sudo tar -xzf "${ARCHIVE}" -C /opt/jetbrains
+      sudo ln -sfn /opt/jetbrains/$EXTRACTED_NAME /opt/jetbrains/rider
+      rm -f "${ARCHIVE}"
+
+      DESKTOP_FILE="$HOME/.local/share/applications/rider.desktop"
+      mkdir -p "$(dirname "$DESKTOP_FILE")"
+      cat > "$DESKTOP_FILE" <<'EOL'
+      [Desktop Entry]
+      Version=1.0
+      Type=Application
+      Name=Rider
+      Exec=/opt/jetbrains/rider/bin/rider.sh
+      Icon=/opt/jetbrains/rider/bin/rider.png
+      Categories=Development;IDE;
+      Terminal=false
+      EOL
