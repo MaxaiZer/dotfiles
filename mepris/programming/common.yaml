@@ -1,3 +1,13 @@
 steps:
   - id: install-vscode
     packages: ["vscode"]
+
+  - id: install-docker-arch
+    os: "%arch"
+    packages: ["docker"]
+
+  - id: run-docker-linux
+    os: "linux"
+    script: |
+      sudo systemctl enable docker.service
+      sudo systemctl start docker.service
