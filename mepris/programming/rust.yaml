@@ -1,0 +1,5 @@
+steps:
+  - id: install-rust
+    packages: ["rustup"]
+    script: |
+      rustup default stable
