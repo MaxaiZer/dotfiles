@@ -2,6 +2,20 @@ steps:
   - id: install-vscode
     packages: ["vscode"]
 
+  - id: activate-jetbrains-linux
+    os: "linux"
+    env: ["JETBRAINS_ARCHIVE_URL", "FILE_ACCESS_USER", "FILE_ACCESS_PASSWORD"]
+    packages: ["7zip"]
+    script: |
+      set -e
+      ARCHIVE="jetbrains"
+      curl -L -f -u "$FILE_ACCESS_USER:$FILE_ACCESS_PASSWORD" -o "$ARCHIVE" "$JETBRAINS_ARCHIVE_URL"
+      7z x -y "$ARCHIVE"
+      rm "$ARCHIVE"
+      chmod +x ./jetbra/scripts/install.sh
+      ./jetbra/scripts/install.sh
+
+
   - id: install-docker-arch
     os: "%arch"
     packages: ["docker"]
