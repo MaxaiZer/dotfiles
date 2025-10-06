@@ -1,4 +1,50 @@
 steps:
+  - id: install-bitwarden-linux
+    os: "linux"
+    packages: ["7zip"]
+    script: |
+      set -e
+      curl -L "https://vault.bitwarden.com/download/?app=cli&platform=linux" -o bw.zip
+      7z x -y bw.zip
+      rm bw.zip
+      chmod +x bw
+      sudo mv bw /usr/local/bin/
+
+  - id: bitwarden-fetch-keys
+    os: "!windows"
+    env: ["BITWARDEN_EMAIL"]
+    packages: ["jq"]
+    script: |
+      set -e
+      STATUS=$(bw status --raw | jq -r '.status')
+
+      if [ "$STATUS" = "unauthenticated" ]; then
+          read -s -p "Enter Bitwarden master password: " MASTER_PASSWORD
+          BW_SESSION=$(bw login $BITWARDEN_EMAIL $MASTER_PASSWORD --raw)
+      else
+          BW_SESSION=$(bw unlock --raw)
+      fi
+
+      PRIVATE_KEY=$(bw get item sshkey --session "$BW_SESSION" --raw | jq -r '.sshKey.privateKey')
+      PUBLIC_KEY=$(bw get item sshkey --session "$BW_SESSION" --raw | jq -r '.sshKey.publicKey')
+
+      if [ -z "$PRIVATE_KEY" ] || [ -z "$PUBLIC_KEY" ]; then
+          echo "Error: One or both SSH keys are empty!"
+          exit 1
+      fi
+
+      PRIVATE_PATH="$HOME/.ssh/key"
+      PUBLIC_PATH="$HOME/.ssh/key.pub"
+
+      mkdir -p "$HOME/.ssh"
+      chmod 700 "$HOME/.ssh"
+
+      echo "$PRIVATE_KEY" > "$PRIVATE_PATH"
+      chmod 600 "$PRIVATE_PATH"
+
+      echo "$PUBLIC_KEY" > "$PUBLIC_PATH"
+      chmod 644 "$PUBLIC_PATH"
+
   - id: keychain
     os: "linux"
     packages: ["keychain"]

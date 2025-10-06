@@ -19,7 +19,7 @@ set fish_greeting
 
 if type -q keychain
     set -gx SHELL /usr/bin/fish
-    eval (keychain --eval --quiet --agents ssh $HOME/.ssh/github)
+    eval (keychain --eval --quiet --agents ssh $HOME/.ssh/key)
 end
 
 function yy

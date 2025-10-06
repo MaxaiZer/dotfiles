@@ -7,18 +7,6 @@ steps:
       git config --global user.name "$GIT_NAME"
       git config --global user.email "$GIT_EMAIL"
 
-  - id: setup-github-ssh-key
-    os: "!windows"
-    tags: ["git"]
-    env: ["GITHUB_KEY_URL", "FILE_ACCESS_USER", "FILE_ACCESS_PASSWORD"]
-    script: |
-      set -e
-      SSH_DIR="$HOME/.ssh"
-      mkdir -p "$SSH_DIR"
-      KEY_FILE="$SSH_DIR/github"
-      curl -L -f -u "$FILE_ACCESS_USER:$FILE_ACCESS_PASSWORD" -o "$KEY_FILE" "$GITHUB_KEY_URL"
-      chmod 600 "$KEY_FILE"
-
   - id: git-fsmonitor
     os: "windows"
     tags: ["git"]
