@@ -1,0 +1,4 @@
+fd:
+  apt: fd-find
+  zypper: fd-find
+  dnf: fd-find

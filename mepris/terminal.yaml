@@ -2,7 +2,7 @@ steps:
   - id: terminal-core
     tags: ["terminal"]
     packages:
-      ["gcc", "ripgrep", "sed", "neovim", "lazygit", "zoxide", "starship"]
+      ["gcc", "fd", "ripgrep", "sed", "neovim", "lazygit", "zoxide", "starship"]
 
   - id: fzf
     os: "!windows"
@@ -41,16 +41,6 @@ steps:
       unzip -q yazi.zip -d yazi-temp
       sudo mv yazi-temp/*/{ya,yazi} /usr/local/bin
       rm -rf yazi-temp yazi.zip
-
-  - id: fd-find
-    os: "!windows && !%arch"
-    tags: ["terminal"]
-    packages: ["fd-find"]
-
-  - id: fd
-    os: "windows || %arch"
-    tags: ["terminal"]
-    packages: ["fd"]
 
   - id: stow
     os: "!windows"
