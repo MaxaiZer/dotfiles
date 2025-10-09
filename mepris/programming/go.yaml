@@ -4,6 +4,6 @@ steps:
 
   - id: install-goland-linux
     os: "linux"
-    script: | #2024 version to easy crack
+    script: |
       chmod +x install_jetbrains.sh
-      ./install_jetbrains.sh goland 2024.2.3 "https://download-cdn.jetbrains.com/go/goland-2024.2.3.tar.gz"
+      ./install_jetbrains.sh goland 2025.2.3 "https://download-cdn.jetbrains.com/go/goland-2025.2.3.tar.gz"
