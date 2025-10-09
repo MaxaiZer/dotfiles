@@ -48,3 +48,8 @@ steps:
   - id: keychain
     os: "linux"
     packages: ["keychain"]
+
+  - id: install-termius-arch
+    os: "%arch"
+    packages: ["termius"]
+    package_source: aur
