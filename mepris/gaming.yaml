@@ -19,8 +19,6 @@ steps:
       [
         "steam",
         "lutris",
-        "heroic-games-launcher",
-        "protontricks",
         "lib32-gamemode", "gamemode",
         "wine",
         "winetricks",
@@ -29,7 +27,7 @@ steps:
         "lib32-ocl-icd",
         "lib32-opencl-icd-loader",
         "lib32-openal", "openal",
-        "lib32-mpg123", "mg123",
+        "lib32-mpg123", "mpg123",
         "lib32-libva", "libva",
         "lib32-libjpeg-turbo", "libjpeg-turbo",
         "lib32-giflib", "giflib",
@@ -40,7 +38,7 @@ steps:
         "mangohud",
         "vulkan-tools",
       ]
-  - id: install-ge-proton-arch
+  - id: install-gaming-stuff-aur
     os: "%arch"
-    packages: ["proton-ge-custom-bin"]
+    packages: ["heroic-games-launcher", "protontricks", "proton-ge-custom-bin"]
     package_source: aur
