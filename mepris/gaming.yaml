@@ -1,0 +1,46 @@
+steps:
+  - id: install-nvidia-stuff
+    os: "linux"
+    when: |
+      lspci | grep -i nvidia >/dev/null 2>&1
+    packages:
+      [
+        "nvidia-dkms",
+        "nvidia-utils",
+        "lib32-nvidia-utils",
+        "nvidia-settings",
+        "vulkan-icd-loader",
+        "lib32-vulkan-icd-loader",
+      ]
+
+  - id: install-gaming-stuff
+    os: "linux"
+    packages:
+      [
+        "steam",
+        "lutris",
+        "heroic-games-launcher",
+        "protontricks",
+        "lib32-gamemode", "gamemode",
+        "wine",
+        "winetricks",
+        "glfw",
+        "lib32-alsa-plugins", "alsa-plugins",
+        "lib32-ocl-icd",
+        "lib32-opencl-icd-loader",
+        "lib32-openal", "openal",
+        "lib32-mpg123", "mg123",
+        "lib32-libva", "libva",
+        "lib32-libjpeg-turbo", "libjpeg-turbo",
+        "lib32-giflib", "giflib",
+        "lib32-gtk3",
+        "lib32-gst-plugins-base-libs", "gst-plugins-base-libs",
+        "libxslt",
+        "ttf-liberation",
+        "mangohud",
+        "vulkan-tools",
+      ]
+  - id: install-ge-proton-arch
+    os: "%arch"
+    packages: ["proton-ge-custom-bin"]
+    package_source: aur
