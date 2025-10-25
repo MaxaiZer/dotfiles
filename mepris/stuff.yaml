@@ -1,9 +1,14 @@
 steps:
-
   - id: install-amneziavpn-arch
     os: "%arch"
     packages: ["amneziavpn-bin"]
     package_source: aur
+
+  - id: amneziavpn-fix-arch #https://github.com/amnezia-vpn/amnezia-client/issues/792#issuecomment-2508097498
+    os: "%arch"
+    script: |
+      sudo systemctl enable systemd-resolved.service && sudo systemctl start systemd-resolved.service
+      sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
   - id: install-anki-non-arch
     os: "!%arch"
