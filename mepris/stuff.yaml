@@ -11,14 +11,14 @@ steps:
 
   - id: install-anki-arch
     os: "%arch"
-    packages: ["anki"]
+    packages: ["anki-bin"]
     package_source: aur
 
   - id: install-obsidian
     packages: ["obsidian"]
 
   - id: install-messaging-apps
-    packages: ["telegram", "discord"]
+    packages: ["telegram-desktop", "discord"]
 
   - id: install-browser
     packages: ["vivaldi"]
