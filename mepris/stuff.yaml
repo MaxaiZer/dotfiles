@@ -1,4 +1,10 @@
 steps:
+
+  - id: install-amneziavpn-arch
+    os: "%arch"
+    packages: ["amneziavpn-bin"]
+    package_source: aur
+
   - id: install-anki-non-arch
     os: "!%arch"
     packages: ["anki"]
