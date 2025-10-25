@@ -40,5 +40,5 @@ steps:
       ]
   - id: install-gaming-stuff-aur
     os: "%arch"
-    packages: ["heroic-games-launcher", "protontricks", "proton-ge-custom-bin"]
+    packages: ["heroic-games-launcher-bin", "protontricks", "proton-ge-custom-bin"]
     package_source: aur
