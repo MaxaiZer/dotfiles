@@ -18,7 +18,7 @@ steps:
 
   - id: install-docker-arch
     os: "%arch"
-    packages: ["docker"]
+    packages: ["docker", "docker-compose"]
 
   - id: run-docker-linux
     os: "linux"
