@@ -57,6 +57,11 @@ steps:
         sudo ln -sf "$img" /usr/share/backgrounds/
       done
 
+  - id: fix-nvim-lazy-not-found
+    os: "!windows"
+    tags: ["terminal", "stow"]
+    script: rm -rf ~/.local/share/nvim/lazy/
+
   - id: stow-zsh
     os: "!windows"
     tags: ["terminal", "stow"]
