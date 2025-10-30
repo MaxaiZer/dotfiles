@@ -1,10 +1,12 @@
 steps:
 
   - id: install-dotnet-sdk
+    tags: ["csharp"]
     packages: ["dotnet-sdk"]
 
   - id: install-rider-linux
     os: "linux"
+    tags: ["csharp"]
     script: |
       chmod +x install_jetbrains.sh
       ./install_jetbrains.sh rider 2025.2.3 "https://download-cdn.jetbrains.com/rider/JetBrains.Rider-2025.2.3.tar.gz"

@@ -67,6 +67,16 @@ local live_grep_config = {
 }
 
 return {
+  -- {
+  --   "ibhagwan/fzf-lua",
+  --   keys = function(_, keys)
+  --     local filtered = vim.tbl_filter(function(k)
+  --       return k[1] ~= "<leader>/"
+  --     end, keys)
+  --
+  --     return filtered
+  --   end,
+  -- },
   { "nvim-telescope/telescope-live-grep-args.nvim" },
   {
     "nvim-telescope/telescope.nvim",

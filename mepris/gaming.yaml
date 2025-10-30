@@ -42,3 +42,8 @@ steps:
     os: "%arch"
     packages: ["heroic-games-launcher", "protontricks", "proton-ge-custom-bin"]
     package_source: aur
+
+  - id: install-steam-fix-launcher #https://github.com/BadKiko/steam-online-fix-launcher
+    os: "linux"
+    script: |
+      curl -L https://github.com/badkiko/steam-online-fix-launcher/releases/latest/download/org.badkiko.sofl.flatpak -o /tmp/sofl.flatpak && flatpak install --user -y /tmp/sofl.flatpak && rm /tmp/sofl.flatpak
