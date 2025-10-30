@@ -22,6 +22,4 @@ steps:
 
   - id: run-docker-linux
     os: "linux"
-    script: |
-      sudo systemctl enable docker.service
-      sudo systemctl start docker.service
+    script: sudo systemctl enable --now docker.service
