@@ -10,6 +10,12 @@ steps:
       sudo systemctl enable --now systemd-resolved.service
       sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
+  - id: install-pipewire-effects
+    os: "linux"
+    packages: ["easyeffects", "lsp-plugins"]
+    script: |
+      sudo find /usr/share/applications -maxdepth 1 -type f -name 'in.lsp_plug*.desktop' -delete && sudo update-desktop-database
+
   - id: install-anki-non-arch
     os: "!%arch"
     packages: ["anki"]
