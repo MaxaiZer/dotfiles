@@ -41,3 +41,8 @@ steps:
 
   - id: install-torrent
     packages: ["qbittorrent"]
+
+  - id: install-qdirstat-arch
+    os: "%arch"
+    packages: ["qdirstat"]
+    package_source: aur
