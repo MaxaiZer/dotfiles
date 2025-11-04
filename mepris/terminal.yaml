@@ -5,7 +5,12 @@ steps:
       ["gcc", "fd", "ripgrep", "sed", "neovim", "lazygit", "zoxide", "starship"]
 
   - id: fzf
-    os: "!windows"
+    os: "!%debian"
+    tags: ["terminal"]
+    packages: ["fzf"]
+
+  - id: fzf-debian
+    os: "%debian"
     tags: ["terminal"]
     script: |
       git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -19,7 +24,7 @@ steps:
   - id: windows-powershell
     os: "windows"
     tags: ["terminal"]
-    packages: ["pwsh", "fzf"]
+    packages: ["pwsh"]
     script:
       shell: pwsh
       run: |
