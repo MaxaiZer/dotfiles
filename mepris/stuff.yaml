@@ -16,6 +16,11 @@ steps:
     script: |
       sudo find /usr/share/applications -maxdepth 1 -type f -name 'in.lsp_plug*.desktop' -delete && sudo update-desktop-database
 
+  - id: install-snapper
+    os: "linux"
+    packages: ["snapper", "snap-pac", "btrfs-assistant"]
+    script: sudo snapper -c root create-config /
+
   - id: install-anki-non-arch
     os: "!%arch"
     packages: ["anki"]
