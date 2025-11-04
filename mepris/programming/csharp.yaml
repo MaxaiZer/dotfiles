@@ -3,8 +3,13 @@ steps:
   - id: install-dotnet-sdk
     packages: ["dotnet-sdk"]
 
-  - id: install-rider-linux
-    os: "linux"
+  - id: install-rider-arch
+    os: "%arch"
+    packages: ["rider"]
+    package_source: aur
+
+  - id: install-rider-non-arch
+    os: "linux && !%arch"
     script: |
       chmod +x install_jetbrains.sh
       ./install_jetbrains.sh rider 2025.2.3 "https://download-cdn.jetbrains.com/rider/JetBrains.Rider-2025.2.3.tar.gz"

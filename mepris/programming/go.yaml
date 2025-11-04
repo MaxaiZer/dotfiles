@@ -2,8 +2,13 @@ steps:
   - id: install-go
     packages: ["go"]
 
-  - id: install-goland-linux
-    os: "linux"
+  - id: install-goland-arch
+    os: "%arch"
+    packages: ["goland", "goland-jre"]
+    package_source: aur
+
+  - id: install-goland-non-arch
+    os: "linux && !%arch"
     script: |
       chmod +x install_jetbrains.sh
       ./install_jetbrains.sh goland 2025.2.3 "https://download-cdn.jetbrains.com/go/goland-2025.2.3.tar.gz"
