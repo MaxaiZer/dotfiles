@@ -38,6 +38,8 @@ steps:
         "mangohud",
         "vulkan-tools",
       ]
+    script: winecfg && winetricks vcrun6sp6 #vcrun6sp6 to run some game installers
+
   - id: install-gaming-stuff-aur
     os: "%arch"
     packages: ["hydra-launcher-bin", "heroic-games-launcher-bin", "protontricks", "proton-ge-custom-bin", "protonup-qt", "onlinefix-linux-launcher-bin"]
