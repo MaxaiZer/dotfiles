@@ -49,7 +49,6 @@ steps:
     os: "linux"
     packages: ["keychain"]
 
-  - id: install-termius-arch
-    os: "%arch"
-    packages: ["termius"]
-    package_source: aur
+  - id: install-xpipe
+    os: "!windows"
+    script: bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
