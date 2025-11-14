@@ -21,6 +21,11 @@ steps:
     packages: ["snapper", "snap-pac", "btrfs-assistant"]
     script: sudo snapper -c root create-config /
 
+  - id: install-cron-arch
+    os: "%arch"
+    packages: ["cronie"]
+    script: sudo systemctl enable --now cronie.service
+
   - id: install-anki-non-arch
     os: "!%arch"
     packages: ["anki"]
