@@ -15,6 +15,7 @@ set -U fish_color_autosuggestion white
 set -U fish_color_operator white
 set -U fish_color_error red
 
+set -x EDITOR nvim
 set fish_greeting
 
 if type -q keychain
