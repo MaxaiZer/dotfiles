@@ -42,5 +42,5 @@ steps:
 
   - id: install-gaming-stuff-aur
     os: "%arch"
-    packages: ["hydra-launcher-bin", "heroic-games-launcher-bin", "protontricks", "proton-ge-custom-bin", "protonup-qt", "onlinefix-linux-launcher-bin"]
+    packages: ["hydra-launcher-bin", "heroic-games-launcher-bin", "protontricks", "protonup-qt", "onlinefix-linux-launcher-bin"]
     package_source: aur
