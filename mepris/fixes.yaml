@@ -1,0 +1,29 @@
+steps:
+  - id: fix-shutdown-timeout
+    os: "linux"
+    script: |
+      set -e
+      SERVICE_FILE=""
+      for path in /usr/lib/systemd/system/user@.service; do
+        if [[ -f "$path" ]]; then
+          SERVICE_FILE="$path"
+          break
+        fi
+      done
+
+      if [[ -z "$SERVICE_FILE" ]]; then
+        echo "❌ user@.service не найден!"
+        exit 1
+      fi
+
+      if grep -q '^TimeoutStopSec=' "$SERVICE_FILE"; then
+        sudo sed -i 's/^TimeoutStopSec=.*/TimeoutStopSec=4s/' "$SERVICE_FILE"
+      else
+        sudo sed -i '/^\[Service\]/a TimeoutStopSec=4s' "$SERVICE_FILE"
+      fi
+
+      echo "✅ TimeoutStopSec установлен на 4s"
+
+      systemctl daemon-reexec
+      systemctl daemon-reload
+      echo "🔄 Systemd перезапущен"
