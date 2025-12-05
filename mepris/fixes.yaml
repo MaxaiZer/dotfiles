@@ -27,3 +27,17 @@ steps:
       systemctl daemon-reexec
       systemctl daemon-reload
       echo "🔄 Systemd перезапущен"
+
+  - id: fix-small-swap-btrfs
+    os: "linux"
+    when: |
+      fs_type=$(findmnt -n -o FSTYPE /swap)
+      [ "$fs_type" = "btrfs" ]
+    script: |
+      set -e
+      sudo swapoff /swap/swapfile
+      sudo rm /swap/swapfile
+      sudo btrfs filesystem mkswapfile --size 8g /swap/swapfile
+      sudo mkswap /swap/swapfile
+      sudo swapon /swap/swapfile
+
