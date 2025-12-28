@@ -1,4 +1,18 @@
 steps:
+
+  - id: install-nvidia-legacy-stuff #10xx series
+    os: "arch || endeavouros"
+    when: |
+      lspci | grep -i nvidia >/dev/null 2>&1
+    packages:
+      [
+        "nvidia-580xx-dkms",
+        "nvidia-580xx-utils",
+        "lib32-nvidia-580xx-utils",
+        "nvidia-580xx-settings",
+      ]
+    package_source: aur
+
   - id: install-nvidia-stuff
     os: "linux"
     when: |
@@ -9,8 +23,6 @@ steps:
         "nvidia-utils",
         "lib32-nvidia-utils",
         "nvidia-settings",
-        "vulkan-icd-loader",
-        "lib32-vulkan-icd-loader",
       ]
 
   - id: install-gaming-stuff
@@ -23,6 +35,7 @@ steps:
         "wine",
         "winetricks",
         "glfw",
+        "lib32-vulkan-icd-loader", "vulkan-icd-loader",
         "lib32-alsa-plugins", "alsa-plugins",
         "lib32-ocl-icd",
         "lib32-opencl-icd-loader",
