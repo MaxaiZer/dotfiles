@@ -41,3 +41,7 @@ steps:
       sudo mkswap /swap/swapfile
       sudo swapon /swap/swapfile
 
+  - id: fix-disable-firewalld #because it blocks autodetection of shared folders
+    os: "linux"
+    when: systemctl is-active --quiet firewalld && exit 0 || exit 1
+    script: sudo systemctl disable firewalld
