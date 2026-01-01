@@ -15,11 +15,12 @@ steps:
       chmod +x ./jetbra/scripts/install.sh
       ./jetbra/scripts/install.sh
 
-
   - id: install-docker-arch
     os: "%arch"
     packages: ["docker", "docker-compose"]
 
   - id: run-docker-linux
     os: "linux"
-    script: sudo systemctl enable --now docker.service
+    script: |
+      sudo systemctl enable --now docker.service
+      sudo usermod -aG docker $USER
