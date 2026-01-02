@@ -3,29 +3,22 @@ steps:
     os: "linux"
     script: |
       set -e
-      SERVICE_FILE=""
-      for path in /usr/lib/systemd/system/user@.service; do
-        if [[ -f "$path" ]]; then
-          SERVICE_FILE="$path"
-          break
-        fi
-      done
+      CONF="/etc/systemd/system.conf"
 
-      if [[ -z "$SERVICE_FILE" ]]; then
-        echo "❌ user@.service не найден!"
+      if [[ ! -f "$CONF" ]]; then
+        echo "❌ system.conf не найден!"
         exit 1
       fi
 
-      if grep -q '^TimeoutStopSec=' "$SERVICE_FILE"; then
-        sudo sed -i 's/^TimeoutStopSec=.*/TimeoutStopSec=4s/' "$SERVICE_FILE"
+      if grep -Eq '^\s*#?\s*DefaultTimeoutStopSec=' "$CONF"; then
+        sudo sed -Ei 's|^\s*#?\s*DefaultTimeoutStopSec=.*|DefaultTimeoutStopSec=15s|' "$CONF"
       else
-        sudo sed -i '/^\[Service\]/a TimeoutStopSec=4s' "$SERVICE_FILE"
+        echo "DefaultTimeoutStopSec=15s" | sudo tee -a "$CONF" > /dev/null
       fi
 
-      echo "✅ TimeoutStopSec установлен на 4s"
+      echo "✅ DefaultTimeoutStopSec установлен на 15s"
 
       systemctl daemon-reexec
-      systemctl daemon-reload
       echo "🔄 Systemd перезапущен"
 
   - id: fix-small-swap-btrfs
