@@ -91,6 +91,7 @@ steps:
       stow starship
       chmod +x ~/dotfiles/fish/setup.sh
       ~/dotfiles/fish/setup.sh
+      mepris completion fish > ~/.config/fish/completions/mepris.fish
 
   - id: stow-konsole
     os: "!windows"
