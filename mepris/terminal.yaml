@@ -19,7 +19,7 @@ steps:
   - id: neovim-linux-helpers
     os: "linux"
     tags: ["terminal"]
-    packages: ["xclip"]
+    packages: ["wl-clipboard"]
 
   - id: windows-powershell
     os: "windows"
