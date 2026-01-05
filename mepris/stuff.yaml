@@ -58,7 +58,7 @@ steps:
 
   - id: install-brother-printer-driver-arch
     os: "%arch"
-    packages: ["brlazer"]
+    packages: ["brlaser"]
     package_source: aur
 
   - id: install-multimedia-helpers-arch
