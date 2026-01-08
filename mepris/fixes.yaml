@@ -38,3 +38,13 @@ steps:
     os: "linux"
     when: systemctl is-active --quiet firewalld && exit 0 || exit 1
     script: sudo systemctl disable firewalld
+
+  - id: fix-enable-sysrq #nvidia driver can crush, REISUB time!
+    os: "linux"
+    when: |
+      [ "$(cat /proc/sys/kernel/sysrq 2>/dev/null || echo 0)" != "1" ]
+    script: |
+      set -e
+      CONF="/etc/sysctl.d/99-sysrq.conf"
+      echo "kernel.sysrq = 1" | sudo tee "$CONF" > /dev/null
+      sudo sysctl --system
