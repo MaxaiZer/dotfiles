@@ -16,5 +16,5 @@ steps:
       ./install_jetbrains.sh rustrover 2025.2.3 "https://download-cdn.jetbrains.com/rustrover/RustRover-2025.2.3.tar.gz"
 
   - id: install-cargo-utils
-    packages: ["cargo-bump"]
+    packages: ["cargo-bump", "sqlx-cli"]
     package_source: cargo
