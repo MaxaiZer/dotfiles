@@ -1,9 +1,7 @@
 return {
   "rmagatti/auto-session",
   lazy = false,
-  init = function()
-    vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-  end,
+  init = function() end,
 
   ---enables autocomplete for opts
   ---@module "auto-session"
