@@ -1,4 +1,11 @@
 steps:
+  - id: install-dbeaver
+    packages: ["dbeaver"]
+
+  - id: fix-dbeaver-arch
+    os: "%arch"
+    script: sudo archlinux-java set java-21-openjdk
+
   - id: install-vscode
     packages: ["vscode"]
 
