@@ -48,3 +48,8 @@ steps:
     script: |
       sudo systemctl enable --now docker.service
       sudo usermod -aG docker $USER
+
+  - id: install-minikube
+    os: "linux"
+    packages: ["kubectl", "minikube"]
+    script: minikube start --driver=docker
