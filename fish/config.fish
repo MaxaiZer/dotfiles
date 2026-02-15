@@ -8,6 +8,7 @@ starship init fish | source
 
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/go/bin
+fish_add_path $HOME/.npm-global/bin
 
 set -U fish_color_command green
 set -U fish_color_param white
