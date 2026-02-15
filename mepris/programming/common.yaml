@@ -8,6 +8,10 @@ steps:
       mkdir ~/.npm-global
       npm config set prefix '~/.npm-global'
 
+  - id: install-language-servers-npm
+    packages: ["yaml-language-server"]
+    package_source: npm
+
   - id: install-dbeaver
     packages: ["dbeaver"]
 
