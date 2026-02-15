@@ -12,6 +12,10 @@ steps:
     packages: ["yaml-language-server"]
     package_source: npm
 
+  - id: install-ai-agent
+    packages: ["opencode-ai"]
+    package_source: npm
+
   - id: install-dbeaver
     packages: ["dbeaver"]
 
