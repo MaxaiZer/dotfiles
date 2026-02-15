@@ -1,4 +1,13 @@
 steps:
+  - id: install-npm
+    packages: ["nodejs-lts", "npm"]
+
+  - id: npm-config-user
+    os: "!windows"
+    script: |
+      mkdir ~/.npm-global
+      npm config set prefix '~/.npm-global'
+
   - id: install-dbeaver
     packages: ["dbeaver"]
 
