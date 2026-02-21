@@ -26,14 +26,8 @@ steps:
     packages: ["cronie"]
     script: sudo systemctl enable --now cronie.service
 
-  - id: install-anki-non-arch
-    os: "!%arch"
+  - id: install-anki
     packages: ["anki"]
-
-  - id: install-anki-arch
-    os: "%arch"
-    packages: ["anki-bin"]
-    package_source: aur
 
   - id: install-obsidian
     packages: ["obsidian"]
