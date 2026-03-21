@@ -1,9 +1,8 @@
 steps:
-
-  - id: install-nvidia-legacy-stuff #10xx series
+  - id: install-nvidia-pascal-drivers #for 10xx series
     os: "arch || endeavouros"
     when: |
-      lspci | grep -i nvidia >/dev/null 2>&1
+      lspci | grep -i 'NVIDIA.*GP10' >/dev/null 2>&1
     packages:
       [
         "nvidia-580xx-dkms",
@@ -14,10 +13,11 @@ steps:
       ]
     package_source: aur
 
-  - id: install-nvidia-stuff
+  - id: install-nvidia-drivers
     os: "linux"
     when: |
-      lspci | grep -i nvidia >/dev/null 2>&1
+      lspci | grep -i 'nvidia' >/dev/null 2>&1 && \
+        ! lspci | grep -i 'NVIDIA.*GP10' >/dev/null 2>&1
     packages:
       [
         "nvidia-dkms",
