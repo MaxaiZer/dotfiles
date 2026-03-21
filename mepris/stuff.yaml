@@ -81,3 +81,7 @@ steps:
   - id: install-office-arch
     os: "%arch"
     packages: ["libreoffice-fresh"]
+
+  - id: install-ocr
+    os: "linux"
+    packages: ["tesseract-data-eng", "tesseract-data-rus", "gimagereader-qt"]
