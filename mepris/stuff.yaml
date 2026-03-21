@@ -53,12 +53,14 @@ steps:
 
   - id: install-printer-support
     os: "linux"
-    packages: ["system-config-printer", "cups"]
+    packages: ["system-config-printer", "cups", "simple-scan"]
 
-  - id: install-brother-printer-driver-arch
+  - id: install-brother-scan-support #example for dcp-l2520dw
     os: "%arch"
-    packages: ["brlaser"]
+    packages: ["brscan4"]
     package_source: aur
+    script: |
+      sudo brsaneconfig4 -a name=Brother2520DW model=DCP-L2520DW ip=192.168.0.225
 
   - id: install-multimedia-helpers-arch
     os: "%arch"
