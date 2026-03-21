@@ -9,22 +9,27 @@ steps:
     script: |
       sudo systemctl enable --now systemd-resolved.service
       sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+    check: systemctl is-active --quiet systemd-resolved.service && [ "$(readlink /etc/resolv.conf)" = "../run/systemd/resolve/stub-resolv.conf" ] || exit 1
 
   - id: install-pipewire-effects
     os: "linux"
     packages: ["easyeffects", "lsp-plugins"]
     script: |
       sudo find /usr/share/applications -maxdepth 1 -type f -name 'in.lsp_plug*.desktop' -delete && sudo update-desktop-database
+    check: |
+      ! ls /usr/share/applications/in.lsp_plug*.desktop &>/dev/null || exit 1
 
   - id: install-snapper
     os: "linux"
     packages: ["snapper", "snap-pac", "btrfs-assistant"]
     script: sudo snapper -c root create-config /
+    check: snapper -c root list-configs 2>/dev/null | grep -q "^root" || exit 1
 
   - id: install-cron-arch
     os: "%arch"
     packages: ["cronie"]
     script: sudo systemctl enable --now cronie.service
+    check: systemctl is-active --quiet cronie.service
 
   - id: install-anki
     packages: ["anki"]

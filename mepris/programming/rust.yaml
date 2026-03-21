@@ -3,6 +3,7 @@ steps:
     packages: ["rustup"]
     script: |
       rustup default stable
+    check: rustup default | grep -q "^stable" || exit 1
 
   - id: install-rustrover-arch
     os: "%arch"

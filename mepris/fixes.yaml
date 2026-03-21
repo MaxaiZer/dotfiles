@@ -20,6 +20,8 @@ steps:
 
       systemctl daemon-reexec
       echo "🔄 Systemd перезапущен"
+    check: |
+      [ "$(systemctl show -p DefaultTimeoutStopUSec --value)" = "15s" ]
 
   - id: fix-small-swap-btrfs
     os: "linux"
@@ -33,18 +35,20 @@ steps:
       sudo btrfs filesystem mkswapfile --size 8g /swap/swapfile
       sudo mkswap /swap/swapfile
       sudo swapon /swap/swapfile
+    check: |
+      size=$(stat -c%s /swap/swapfile 2>/dev/null || echo 0)
+      [ "$size" -ge $((8*1024*1024*1024)) ]
 
   - id: fix-disable-firewalld #because it blocks autodetection of shared folders
     os: "linux"
-    when: systemctl is-active --quiet firewalld && exit 0 || exit 1
     script: sudo systemctl disable firewalld
+    check: systemctl is-active --quiet firewalld && exit 1 || exit 0
 
   - id: fix-enable-sysrq #nvidia driver can crush, REISUB time!
     os: "linux"
-    when: |
-      [ "$(cat /proc/sys/kernel/sysrq 2>/dev/null || echo 0)" != "1" ]
     script: |
       set -e
       CONF="/etc/sysctl.d/99-sysrq.conf"
       echo "kernel.sysrq = 1" | sudo tee "$CONF" > /dev/null
       sudo sysctl --system
+    check: test "$(cat /proc/sys/kernel/sysrq 2>/dev/null || echo 0)" -eq 1

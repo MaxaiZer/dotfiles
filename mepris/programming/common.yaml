@@ -7,6 +7,8 @@ steps:
     script: |
       mkdir ~/.npm-global
       npm config set prefix '~/.npm-global'
+    check: |
+      [[ "$(npm config get prefix)" == "$HOME/.npm-global" ]] || exit 1
 
   - id: install-language-servers-npm
     packages: ["yaml-language-server"]
@@ -22,6 +24,8 @@ steps:
   - id: fix-dbeaver-arch
     os: "%arch"
     script: sudo archlinux-java set java-21-openjdk
+    check: |
+      [ "$(archlinux-java get)" = "java-21-openjdk" ] || exit 1
 
   - id: install-vscode
     packages: ["vscode"]

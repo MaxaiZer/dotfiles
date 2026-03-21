@@ -9,6 +9,8 @@ steps:
       rm bw.zip
       chmod +x bw
       sudo mv bw /usr/local/bin/
+    check: |
+      [ -x "/usr/local/bin/bw" ] && /usr/local/bin/bw --version &>/dev/null || exit 1
 
   - id: bitwarden-fetch-keys
     os: "!windows"
@@ -52,3 +54,4 @@ steps:
   - id: install-xpipe
     os: "!windows"
     script: bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
+    check: command -v xpipe &>/dev/null || exit 1

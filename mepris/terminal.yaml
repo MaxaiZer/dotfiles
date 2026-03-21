@@ -59,6 +59,9 @@ steps:
       for img in ~/dotfiles/backgrounds/*; do
         sudo ln -sf "$img" /usr/share/backgrounds/
       done
+    check: |
+      [ -d ~/dotfiles ] && [ -L ~/.config/nvim ] && [ -L ~/.config/yazi ] && for img in ~/dotfiles/backgrounds/*;
+      do [ -L "/usr/share/backgrounds/$(basename "$img")" ]; done || exit 1
 
   - id: fix-nvim-lazy-not-found
     os: "!windows"
@@ -90,6 +93,8 @@ steps:
       chmod +x ~/dotfiles/fish/setup.sh
       ~/dotfiles/fish/setup.sh
       mepris completion fish > ~/.config/fish/completions/mepris.fish
+    check: |
+      [ -L ~/.config/starship.toml ] && [ -f ~/.config/fish/completions/mepris.fish ] || exit 1
 
   - id: stow-konsole
     os: "!windows"
@@ -100,6 +105,8 @@ steps:
       cd ~/dotfiles
       stow konsole
       sed -i "s/^DefaultProfile=.*/DefaultProfile=MyProfile.profile/" "$HOME/.config/konsolerc"
+    check: |
+      [ -L ~/.local/share/konsole/MyProfile.profile ] && grep -q "^DefaultProfile=MyProfile.profile" ~/.config/konsolerc || exit 1
 
   - id: stow-windows
     os: "windows"

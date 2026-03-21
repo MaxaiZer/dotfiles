@@ -10,6 +10,7 @@ steps:
   - id: git-fsmonitor
     os: "windows"
     tags: ["git"]
-    script:
+    script: |
       git config --global core.fsmonitor true
       git fsmonitor--daemon start
+    check: git fsmonitor--daemon status 2>$null
