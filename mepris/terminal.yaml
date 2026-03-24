@@ -28,6 +28,14 @@ steps:
     script: |
       Install-Module -Name posh-git -Scope CurrentUser -Force
       Install-Module -Name PSFzf -Scope CurrentUser -Force
+    check: |
+      $modules = @("posh-git", "PSFzf")
+      foreach ($m in $modules) {
+          if (-not (Get-Module -ListAvailable -Name $m)) {
+              exit 1
+          }
+      }
+      exit 0
 
   - id: yazi
     os: "!%debian"
