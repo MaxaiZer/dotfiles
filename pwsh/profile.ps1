@@ -35,3 +35,10 @@ $extraProfilePath = Join-Path $PSScriptRoot "extra.ps1"
 if (Test-Path $extraProfilePath) {
     . $extraProfilePath
 }
+
+if (Test-Path ~/.config/powershell/completions) {
+    Get-ChildItem ~/.config/powershell/completions/*.ps1 | ForEach-Object {
+        . $_
+    }
+}
+
