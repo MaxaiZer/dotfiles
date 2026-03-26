@@ -76,24 +76,10 @@ steps:
     tags: ["terminal", "stow"]
     script: rm -rf ~/.local/share/nvim/lazy/
 
-  - id: stow-zsh
-    os: "!windows"
-    tags: ["terminal", "stow"]
-    env: ["MY_SHELL"]
-    packages: ["zsh"]
-    when: |
-      [ "${MY_SHELL,,}" = "zsh" ] && exit 0 || exit 1
-    script: |
-      chmod +x ~/dotfiles/zsh/setup.sh
-      ~/dotfiles/zsh/setup.sh
-
   - id: stow-fish
     os: "!windows"
     tags: ["terminal", "stow"]
-    env: ["MY_SHELL"]
     packages: ["fish"]
-    when: |
-      [ "${MY_SHELL,,}" = "fish" ] && exit 0 || exit 1
     script: |
       set -e
       cd ~/dotfiles
