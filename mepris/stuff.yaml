@@ -65,6 +65,9 @@ steps:
     script: |
       sudo brsaneconfig4 -a name=Brother2520DW model=DCP-L2520DW ip=192.168.0.225
 
+  - id: install-multimedia-helpers
+    packages: ["obs-studio", "krita"]
+
   - id: install-multimedia-helpers-arch
     os: "%arch"
     packages: ["subtitleedit"]
