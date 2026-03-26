@@ -1,4 +1,7 @@
 steps:
+  - id: install-kate
+    packages: ["kate"]
+
   - id: install-amneziavpn-arch
     os: "%arch"
     packages: ["amneziavpn-bin"]
