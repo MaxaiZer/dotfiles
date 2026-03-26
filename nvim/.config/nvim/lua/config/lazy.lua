@@ -18,7 +18,6 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    { "tenxsoydev/karen-yank.nvim", config = true },
     { "catppuccin", enabled = false },
     { "persistence.nvim", enabled = false },
     -- import/override with your plugins

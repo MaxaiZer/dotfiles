@@ -1,6 +1,8 @@
 vim.keymap.set("n", "<C-a>", ":normal! ggVG<CR>", { desc = "Select all", silent = true })
 vim.keymap.set("n", "<C-q>", ":qa<CR>", { desc = "Quit all", silent = true })
 vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save file", silent = true })
+vim.keymap.set("n", "<C-x>", '"+dd', { desc = "Cut line", silent = true })
+vim.keymap.set("v", "<C-x>", '"+d', { desc = "Cut selection", silent = true })
 
 vim.keymap.set("n", "<M-Right>", ":bnext<CR>", { desc = "Next buffer", silent = true })
 vim.keymap.set("n", "<M-Left>", ":bprevious<CR>", { desc = "Previous buffer", silent = true })
