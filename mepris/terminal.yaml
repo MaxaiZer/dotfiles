@@ -4,6 +4,11 @@ steps:
     packages:
       ["gcc", "fd", "ripgrep", "sed", "neovim", "lazygit", "zoxide", "starship"]
 
+  - id: neovim-linux-helpers
+    os: "linux"
+    tags: ["terminal"]
+    packages: ["wl-clipboard"]
+
   - id: fzf
     os: "!%debian"
     tags: ["terminal"]
@@ -15,11 +20,6 @@ steps:
     script: |
       git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
       ~/.fzf/install --key-bindings --completion --no-update-rc
-
-  - id: neovim-linux-helpers
-    os: "linux"
-    tags: ["terminal"]
-    packages: ["wl-clipboard"]
 
   - id: windows-powershell
     os: "windows"
