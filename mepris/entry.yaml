@@ -1,5 +1,6 @@
 defaults:
   windows_package_manager: scoop
+  windows_shell: pwsh
 
 includes:
   - ssh.yaml
