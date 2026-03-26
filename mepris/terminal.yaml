@@ -71,11 +71,6 @@ steps:
       [ -d ~/dotfiles ] && [ -L ~/.config/nvim ] && [ -L ~/.config/yazi ] && for img in ~/dotfiles/backgrounds/*;
       do [ -L "/usr/share/backgrounds/$(basename "$img")" ]; done || exit 1
 
-  - id: fix-nvim-lazy-not-found
-    os: "!windows"
-    tags: ["terminal", "stow"]
-    script: rm -rf ~/.local/share/nvim/lazy/
-
   - id: stow-fish
     os: "!windows"
     tags: ["terminal", "stow"]
