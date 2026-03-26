@@ -80,7 +80,8 @@ steps:
 
   - id: install-office-arch
     os: "%arch"
-    packages: ["libreoffice-fresh"]
+    packages: ["onlyoffice-bin"]
+    package_source: aur
 
   - id: install-ocr
     os: "linux"
