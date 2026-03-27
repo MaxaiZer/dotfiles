@@ -102,20 +102,59 @@ steps:
     tags: ["terminal", "stow", "no-admin"]
     script: |
       git clone https://github.com/MaxaiZer/dotfiles "$HOME/dotfiles"
+
       #nvim
       $targetDir = "$env:LOCALAPPDATA\nvim"
       New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
       Copy-Item -Recurse -Force "$HOME\dotfiles\nvim\.config\nvim\*" $targetDir
+
       #yazi
       $targetDir = "$env:APPDATA\yazi\config"
       $targetPath = "$targetDir\yazi.toml"
       New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
       Copy-Item -Force "$HOME\dotfiles\yazi\.config\yazi\yazi.toml" $targetPath
       (Get-Content -Path $targetPath -Raw) -replace '\$@', '%1' | Set-Content -Path $targetPath -NoNewline
+
       #starship
       Copy-Item -Force "$HOME\dotfiles\starship\.config\starship.toml" "$HOME\.config\"
+
       #pwsh
       Set-Content -Path $PROFILE -Value (Get-Content "$HOME\dotfiles\pwsh\profile.ps1" -Raw)
+
+      #mepris
+      $completionsDir = Join-Path $HOME ".config/powershell/completions"
+      $outputFile = Join-Path $completionsDir "mepris.ps1"
+      New-Item -ItemType Directory -Force -Path $completionsDir | Out-Null
+      mepris completion powershell | Out-File -FilePath $outputFile -Encoding utf8
+    check: |
+      # nvim
+      $nvimPath = "$env:LOCALAPPDATA\nvim"
+      if (-not (Test-Path $nvimPath -PathType Container)) {
+          exit 1
+      }
+
+      # yazi
+      $yaziPath = "$env:APPDATA\yazi\config\yazi.toml"
+      if (-not ((Test-Path $yaziPath -PathType Leaf) -and ((Get-Item $yaziPath).Length -gt 0))) {
+          exit 1
+      }
+
+      # starship
+      $starshipPath = "$HOME\.config\starship.toml"
+      if (-not ((Test-Path $starshipPath -PathType Leaf) -and ((Get-Item $starshipPath).Length -gt 0))) {
+          exit 1
+      }
+
+      # pwsh
+      if (-not ((Test-Path $PROFILE -PathType Leaf) -and ((Get-Item $PROFILE).Length -gt 0))) {
+          exit 1
+      }
+
+      # mepris
+      $meprisFile = Join-Path $HOME ".config/powershell/completions/mepris.ps1"
+      if (-not ((Test-Path $meprisFile -PathType Leaf) -and ((Get-Item $meprisFile).Length -gt 0))) {
+          exit 1
+      }
 
   - id: nerd-fonts
     os: "!windows"
