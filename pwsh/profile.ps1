@@ -11,6 +11,7 @@ Set-PSReadLineOption -HistorySavePath ~/.pwsh_history
 
 Import-Module posh-git
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Key Ctrl+u -Function BackwardDeleteLine
 
 Set-PSReadLineOption -AddToHistoryHandler {
     param([string]$line)
