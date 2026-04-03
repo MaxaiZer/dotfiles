@@ -171,3 +171,13 @@ steps:
     tags: ["terminal", "fonts"]
     pre_script: scoop bucket add nerd-fonts
     packages: ["JetBrainsMono-NF"]
+
+  - id: install-windows-terminal
+    os: "windows"
+    tags: ["terminal"]
+    packages: ["windows-terminal"]
+    script: |
+      reg import "$env:USERPROFILE\scoop\apps\windows-terminal\current\install-context.reg"
+      $targetDir = "$env:USERPROFILE\scoop\apps\windows-terminal\current\settings"
+      New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
+      Copy-Item -Force "$HOME\dotfiles\pwsh\settings.json" $targetDir
