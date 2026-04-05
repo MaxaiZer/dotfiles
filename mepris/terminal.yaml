@@ -165,12 +165,14 @@ steps:
       ~/dotfiles/install_nerd_fonts.sh
     check: |
       fc-list | grep -qi 'JetBrainsMono.*Nerd Font'
+    provides: ["nerd-fonts"]
 
   - id: nerd-fonts-windows
     os: "windows"
     tags: ["terminal", "fonts"]
     pre_script: scoop bucket add nerd-fonts
     packages: ["JetBrainsMono-NF"]
+    provides: ["nerd-fonts"]
 
   - id: install-windows-terminal
     os: "windows"
@@ -181,3 +183,4 @@ steps:
       $targetDir = "$env:USERPROFILE\scoop\apps\windows-terminal\current\settings"
       New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
       Copy-Item -Force "$HOME\dotfiles\pwsh\settings.json" $targetDir
+    requires: ["nerd-fonts"]
