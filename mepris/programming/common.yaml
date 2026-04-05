@@ -46,14 +46,26 @@ steps:
   - id: install-docker-arch
     os: "%arch"
     packages: ["docker", "docker-compose"]
+    provides: ["docker"]
 
-  - id: run-docker-linux
+  - id: configure-docker-linux
     os: "linux"
     script: |
       sudo systemctl enable --now docker.service
       sudo usermod -aG docker $USER
+    check: |
+      systemctl is-active --quiet docker && groups "$USER" | grep -qw docker
+    requires: ["docker"]
+    provides: ["docker-configured"]
 
   - id: install-minikube
     os: "linux"
     packages: ["kubectl", "minikube"]
-    script: minikube start --driver=docker
+    provides: ["minikube"]
+
+  - id: run-minikube
+    os: "linux"
+    script: |
+      minikube start --driver=docker
+      minikube addons enable metrics-server
+    requires: ["docker-configured", "minikube"]
