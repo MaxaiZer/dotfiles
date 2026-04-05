@@ -1,0 +1,24 @@
+steps:
+  - id: windows-scoop
+    os: "windows"
+    script:
+      shell: powershell
+      run: |
+        Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+        Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    check:
+      shell: powershell
+      run: |
+        if (Get-Command scoop -ErrorAction SilentlyContinue) { exit 0 } else { exit 1 }
+    provides: ["scoop"]
+
+  - id: windows-pwsh
+    os: "windows"
+    packages: ["pwsh"]
+    package_source: scoop
+    requires: ["scoop"]
+    provides: ["pwsh"]
+
+  - id: windows-base-setup
+    os: "windows"
+    requires: ["scoop", "pwsh"]
