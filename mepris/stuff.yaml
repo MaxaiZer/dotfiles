@@ -14,6 +14,10 @@ steps:
       sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
     check: systemctl is-active --quiet systemd-resolved.service && [ "$(readlink /etc/resolv.conf)" = "../run/systemd/resolve/stub-resolv.conf" ] || exit 1
 
+  - id: install-mission-center
+    os: "linux"
+    packages: ["mission-center"]
+
   - id: install-pipewire-effects
     os: "linux"
     packages: ["easyeffects", "lsp-plugins"]
