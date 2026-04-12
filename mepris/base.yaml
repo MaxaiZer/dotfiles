@@ -17,7 +17,6 @@ steps:
     packages: ["pwsh"]
     package_source: scoop
     requires: ["scoop"]
-    provides: ["pwsh"]
 
   - id: windows-base-setup
     os: "windows"

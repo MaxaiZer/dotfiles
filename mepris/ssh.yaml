@@ -15,7 +15,6 @@ steps:
   - id: bitwarden-fetch-keys
     os: "!windows"
     env: ["BITWARDEN_EMAIL"]
-    packages: ["jq"]
     script: |
       set -e
       STATUS=$(bw status --raw | jq -r '.status')
@@ -46,6 +45,7 @@ steps:
 
       echo "$PUBLIC_KEY" > "$PUBLIC_PATH"
       chmod 644 "$PUBLIC_PATH"
+    requires: ["jq"]
 
   - id: keychain
     os: "linux"

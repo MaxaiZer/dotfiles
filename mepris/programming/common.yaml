@@ -1,6 +1,7 @@
 steps:
   - id: install-npm
-    packages: ["nodejs-lts", "npm"]
+    packages: ["nodejs-lts-krypton", "npm"]
+    provides: ["npm"]
 
   - id: npm-config-user
     os: "!windows"

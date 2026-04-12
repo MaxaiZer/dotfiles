@@ -1,13 +1,25 @@
 steps:
   - id: terminal-core
     tags: ["terminal"]
-    packages:
-      ["gcc", "fd", "ripgrep", "sed", "neovim", "lazygit", "zoxide", "starship"]
+    packages: ["fd", "ripgrep", "sed", "lazygit", "zoxide", "starship"]
+    provides: ["terminal-core"]
 
   - id: neovim-linux-helpers
     os: "linux"
     tags: ["terminal"]
     packages: ["wl-clipboard"]
+    provides: ["neovim-linux-helpers"]
+
+  - id: neovim
+    tags: ["terminal"]
+    packages: ["neovim"]
+    requires:
+      - id: neovim-linux-helpers
+        os: "linux"
+      - npm
+      - gcc
+      - nerd-fonts
+    provides: ["nvim"]
 
   - id: fzf
     os: "!%debian"
@@ -20,11 +32,12 @@ steps:
     script: |
       git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
       ~/.fzf/install --key-bindings --completion --no-update-rc
+    check: if command -v fzf
+    provides: ["fzf"]
 
-  - id: windows-powershell
+  - id: setup-pwsh
     os: "windows"
     tags: ["terminal"]
-    packages: ["pwsh"]
     script: |
       Install-Module -Name posh-git -Scope CurrentUser -Force
       Install-Module -Name PSFzf -Scope CurrentUser -Force
@@ -36,6 +49,7 @@ steps:
           }
       }
       exit 0
+    requires: ["fzf"]
 
   - id: yazi
     os: "!%debian"
@@ -45,13 +59,14 @@ steps:
   - id: yazi-debian
     os: "%debian"
     tags: ["terminal"]
-    when: |
-      if command -v yazi >/dev/null 2>&1; then exit 1; else exit 0; fi
     script: |
       wget -qO yazi.zip https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip
       unzip -q yazi.zip -d yazi-temp
       sudo mv yazi-temp/*/{ya,yazi} /usr/local/bin
       rm -rf yazi-temp yazi.zip
+    check: command -v yazi
+    requires: ["unzip"]
+    provides: ["yazi"]
 
   - id: stow
     os: "!windows"
@@ -70,6 +85,7 @@ steps:
     check: |
       [ -d ~/dotfiles ] && [ -L ~/.config/nvim ] && [ -L ~/.config/yazi ] && for img in ~/dotfiles/backgrounds/*;
       do [ -L "/usr/share/backgrounds/$(basename "$img")" ]; done || exit 1
+    requires: ["nvim", "yazi"]
 
   - id: stow-fish
     os: "!windows"
@@ -84,6 +100,7 @@ steps:
       mepris completion fish > ~/.config/fish/completions/mepris.fish
     check: |
       [ -L ~/.config/starship.toml ] && [ -f ~/.config/fish/completions/mepris.fish ] || exit 1
+    requires: ["terminal-core", "fzf"]
 
   - id: stow-konsole
     os: "!windows"
@@ -155,16 +172,17 @@ steps:
       if (-not ((Test-Path $meprisFile -PathType Leaf) -and ((Get-Item $meprisFile).Length -gt 0))) {
           exit 1
       }
+    requires: ["terminal-core", "yazi", "nvim"]
 
   - id: nerd-fonts
     os: "!windows"
     tags: ["terminal", "fonts"]
-    packages: ["jq", "unzip"]
     script: |
       chmod +x ~/dotfiles/install_nerd_fonts.sh
       ~/dotfiles/install_nerd_fonts.sh
     check: |
       fc-list | grep -qi 'JetBrainsMono.*Nerd Font'
+    requires: ["jq", "unzip"]
     provides: ["nerd-fonts"]
 
   - id: nerd-fonts-windows

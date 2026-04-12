@@ -3,6 +3,7 @@ defaults:
   windows_shell: pwsh
 
 includes:
+  - base_pkgs.yaml
   - ssh.yaml
   - terminal.yaml
   - git.yaml

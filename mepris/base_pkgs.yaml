@@ -1,0 +1,7 @@
+steps:
+  - id: non-windows-pkgs
+    os: "!windows"
+    packages: ["jq", "unzip"]
+
+  - id: compilers
+    packages: ["gcc"]
