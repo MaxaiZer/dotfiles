@@ -6,6 +6,7 @@ steps:
     os: "%arch"
     packages: ["amneziavpn-bin"]
     package_source: aur
+    requires: ["amneziavpn-fix-arch"]
 
   - id: amneziavpn-fix-arch #https://github.com/amnezia-vpn/amnezia-client/issues/792#issuecomment-2508097498
     os: "%arch"
@@ -13,6 +14,7 @@ steps:
       sudo systemctl enable --now systemd-resolved.service
       sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
     check: systemctl is-active --quiet systemd-resolved.service && [ "$(readlink /etc/resolv.conf)" = "../run/systemd/resolve/stub-resolv.conf" ] || exit 1
+    provides: ["amneziavpn-fix-arch"]
 
   - id: install-mission-center
     os: "linux"
