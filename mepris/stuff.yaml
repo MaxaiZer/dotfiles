@@ -55,6 +55,10 @@ steps:
   - id: install-torrent
     packages: ["qbittorrent"]
 
+  - id: install-calendar #korganizer -> settings -> general -> calendars -> enable Personal Calendar (somehow), then Configure Digital Clock -> Calendar -> enable Calendar Events
+    os: "linux"
+    packages: ["korganizer", "kdepim-addons"]
+
   - id: install-qdirstat-arch
     os: "%arch"
     packages: ["qdirstat"]
