@@ -40,7 +40,6 @@ steps:
         "lib32-vulkan-icd-loader", "vulkan-icd-loader",
         "lib32-alsa-plugins", "alsa-plugins",
         "lib32-ocl-icd",
-        "lib32-opencl-icd-loader",
         "lib32-openal", "openal",
         "lib32-mpg123", "mpg123",
         "lib32-libva", "libva",
