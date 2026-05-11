@@ -56,5 +56,18 @@ steps:
 
   - id: install-gaming-stuff-aur
     os: "%arch"
-    packages: ["hydra-launcher-bin", "heroic-games-launcher-bin", "protontricks", "protonup-qt", "onlinefix-linux-launcher-bin"]
+    packages:
+      [
+        "portproton",
+        "faugus-launcher",
+        "hydra-launcher-bin",
+        "heroic-games-launcher-bin",
+        "protontricks",
+        "protonplus", #because protonup-qt doesn't support dw-proton
+        "onlinefix-linux-launcher-bin",
+      ]
     package_source: aur
+    script: |
+      WINEPREFIX=~/Faugus/default/pfx winetricks openal #to run Planescape Tornament
+      WINEPREFIX=~/Faugus/default/pfx winetricks vcrun2015 #otherwise can be error like "can't open tmp/....png"
+      xdg-mime default ru.linux_gaming.PortProton.desktop application/x-ms-dos-executable
