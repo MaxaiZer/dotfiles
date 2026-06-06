@@ -32,7 +32,7 @@ steps:
     script: |
       git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
       ~/.fzf/install --key-bindings --completion --no-update-rc
-    check: if command -v fzf
+    check: command -v fzf
     provides: ["fzf"]
 
   - id: setup-pwsh
