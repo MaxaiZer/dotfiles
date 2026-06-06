@@ -71,3 +71,7 @@ steps:
       WINEPREFIX=~/Faugus/default/pfx winetricks openal #to run Planescape Tornament
       WINEPREFIX=~/Faugus/default/pfx winetricks vcrun2015 #otherwise can be error like "can't open tmp/....png"
       xdg-mime default ru.linux_gaming.PortProton.desktop application/x-ms-dos-executable
+
+  - id: install-helvum #Remote Play issue: https://github.com/ValveSoftware/steam-for-linux/issues/7858
+    os: "linux"
+    packages: ["helvum"]
