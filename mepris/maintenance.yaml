@@ -1,0 +1,54 @@
+steps:
+  - id: enable-pacman-aur-autoclean
+    os: "%arch"
+    script: |
+      set -e
+
+      ##### PACMAN autoclean #####
+      sudo paccache -rk2
+      echo 'PACCACHE_ARGS="-k2"' | sudo tee /etc/conf.d/pacman-contrib
+      sudo systemctl enable --now paccache.timer
+
+      ##### YAY cleanup script #####
+      mkdir -p ~/.local/bin
+
+      cat > ~/.local/bin/yay-clean.sh << 'EOF'
+      #!/usr/bin/env bash
+      set -e
+      rm -rf ~/.cache/yay/*
+      EOF
+
+      chmod +x ~/.local/bin/yay-clean.sh
+
+      ##### SYSTEMD USER SERVICE #####
+      mkdir -p ~/.config/systemd/user
+
+      cat > ~/.config/systemd/user/yay-clean.service << 'EOF'
+      [Unit]
+      Description=Clean AUR cache via yay
+
+      [Service]
+      Type=oneshot
+      ExecStart=/home/%u/.local/bin/yay-clean.sh
+      EOF
+
+      cat > ~/.config/systemd/user/yay-clean.timer << 'EOF'
+      [Unit]
+      Description=Weekly AUR cache cleanup
+
+      [Timer]
+      OnCalendar=weekly
+      Persistent=true
+
+      [Install]
+      WantedBy=timers.target
+      EOF
+
+      systemctl --user daemon-reload
+      systemctl --user enable --now yay-clean.timer
+    check: |
+      set -e
+
+      grep -q 'PACCACHE_ARGS="-k2"' /etc/conf.d/pacman-contrib
+      systemctl is-active --quiet paccache.timer
+      systemctl --user is-active --quiet yay-clean.timer
