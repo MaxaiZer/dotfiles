@@ -1,7 +1,7 @@
 steps:
   - id: terminal-core
     tags: ["terminal"]
-    packages: ["fd", "ripgrep", "sed", "lazygit", "zoxide", "starship"]
+    packages: ["fd", "ripgrep", "sed", "lazygit", "zoxide", "starship", "atuin"]
     provides: ["terminal-core"]
 
   - id: neovim-linux-helpers

@@ -6,20 +6,13 @@ chcp 65001 | Out-Null
 # oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/onehalf.minimal.omp.json" | Invoke-Expression
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
-Set-PSReadLineOption -HistorySaveStyle SaveIncrementally
-Set-PSReadLineOption -HistorySavePath ~/.pwsh_history
-
 Import-Module posh-git
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Key Ctrl+u -Function BackwardDeleteLine
 
-Set-PSReadLineOption -AddToHistoryHandler {
-    param([string]$line)
-    return ![string]::IsNullOrWhiteSpace($line)
-}
-
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t'
 Invoke-Expression (&starship init powershell)
+Invoke-Expression (&atuin init powershell --disable-up-arrow | Out-String)
 
 function yy {
     $tmp = New-TemporaryFile | Rename-Item -NewName { $_ -replace 'tmp$', 'txt' } -PassThru

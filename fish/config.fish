@@ -5,6 +5,7 @@ end
 fzf --fish | source
 zoxide init fish | source
 starship init fish | source
+atuin init fish --disable-up-arrow | source
 
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/go/bin
